@@ -1,0 +1,209 @@
+.sidebar{
+    background: #2995BF;
+    height: 2500px;
+    color: #ffffff;
+    font-family: Questrial-regular, sans-serif;
+}
+
+.sidebar a{
+    color: #ffffff;
+    font-size: 16px;
+    width: 100%;
+}
+.site-heading{
+    font-size: 30px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.nav-links{
+    margin-top: 30px;
+    margin-left: 10px;
+}
+
+.top-bar{
+    height: 60px;
+    background: #f2f2f2;
+}
+
+
+.table-container{
+    font-family: Questrial-regular, serif;
+    padding-top: 30px;
+}
+
+
+.header{
+    padding: 20px 0 20px 0;
+    font-size: 125px;
+    color: white;
+}
+
+.login{
+    font-family: Questrial-regular, sans-serif;
+    padding-top: 100px;
+}
+
+.form-input{
+    background: transparent;
+    width: 100%;
+    border: none;
+    margin-bottom: 30px;
+    color: #ffffff;
+    border: 1px solid;
+    line-height: 40px;
+    padding-left:20px;
+}
+
+.form-input:focus{
+    outline: none;
+}
+.form-input::placeholder{
+    color: #ffffff;
+}
+
+.btn-sign-in{
+    background: #ffffff;
+    border: 1px solid;
+    color: #295bff;
+    line-height: 40px;
+    width: 30%;
+    border-radius: 20px;
+    outline: none;
+}
+
+.btn-sign-in:focus{
+    outline: none;
+}
+
+.admin-home-nav{
+    font-family: Questrial-regular, sans-serif;
+    background: #2995bf;
+    color: #ffffff;
+    height: 300px;
+    margin-right: 25px;
+    margin-top: 25px;
+    margin-left: 50px;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+    padding-top: 75px;
+}
+
+.admin-home-nav i {
+    width: 100%;
+    font-size: 100px;
+}
+
+.action-icon{
+    font-size: 30px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.category-container{
+    background: #2995bf;
+    color: white;
+    font-family: Questrial-regular, serif;
+    line-height: 100px;
+    margin-left: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.category-container a{
+    color: #ffffff;
+}
+
+.card-delete-icon{
+    font-size: 25px;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+}
+
+.new-cat-form{
+    padding-left: 30px;
+}
+
+.new-cat-form input{
+    border: 1px solid #2995bf;
+    border-radius: 20px;
+    width: 30%;
+    line-height: 40px;
+    padding-left: 20px;
+}
+.new-cat-form input:focus{
+    outline: none;
+}
+
+.new-cat-form button{
+    background: #2995bf;
+    color: #ffffff;
+    border: none;
+    line-height: 40px;
+    width: 30%;
+}
+
+.settings-wrapper{
+    font-family: Questrial-regular, sans-serif;
+}
+
+.add-book-btn{
+    background: #2995bf;
+    color: #ffffff;
+    padding: 10px 30px 10px 30px;
+    position: absolute;
+    right: 10px;
+    border: none;
+    top: 10px;
+    font-family: Questrial-regular, serif;
+    border-radius: 20px;
+}
+
+.add-book-btn:focus{
+    outline: none;
+}
+
+.book-form-heading{
+    font-family: Questrial-regular, sans-serif;
+    margin-top: 30px;
+}
+
+.book-form-input{
+    border: 1px solid #2995bf;
+    height: 40px;
+    width: 100%;
+    border-radius: 20px;
+    padding-left: 20px;
+    font-family: Questrial-regular, serif;
+}
+
+.book-form-input:focus{
+    outline: none;
+}
+
+select{
+    height: 40px;
+}
+
+.custom-file-upload{
+    border: 1px solid #2995bf;
+    height: 40px;
+    width: 100%;
+    border-radius: 20px;
+    padding-left: 20px;
+    font-family: Questrial-regular, serif;
+}
+input[type="file"] {
+    display: none;
+}
+
+.book-add-btn{
+    width: 40%;
+    background: #2995bf;
+    line-height: 40px;
+    color: #ffffff;
+    font-family: Questrial-regular, serif;
+    border-radius: 5px;
+}
