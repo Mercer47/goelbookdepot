@@ -1,6 +1,6 @@
 <?php $this->view('layouts/header') ?>
     <div class="col-md-12 form-container">
-        <form>
+        <form method="POST" action="<?php echo site_url('auth/signin') ?>">
             <p class="form-heading">EMAIL</p>
             <input type="text" class="form-input" name="email" />
             <p class="form-heading">PASSWORD</p>
