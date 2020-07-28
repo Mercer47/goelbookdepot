@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>GBD Admin</title>
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
+    <title>GBD Admin</title>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/admin.css'); ?>">
     <link rel="shortcut icon" href="<?php echo base_url('assets/css/icons/comic.png') ?>">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <link rel="stylesheet" href="<?php echo base_url('assets\Datatables\DataTables-1.10.20\css\dataTables.bootstrap4.min.css'); ?>">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
     <style>
         @font-face{
             font-family: Nunito-regular;

@@ -16,6 +16,10 @@
         <i class="lab la-buffer"></i>
         BUNDLES
     </div>
+    <div class="col-md-5 admin-home-nav"  onclick="location.href='<?php echo site_url('stats') ?>'">
+        <i class="las la-chart-bar"></i>
+        STATS
+    </div>
     <div class="col-md-5 admin-home-nav"  onclick="location.href='<?php echo site_url('home/logout') ?>'">
         <i class="las la-sign-out-alt"></i>
         LOGOUT
