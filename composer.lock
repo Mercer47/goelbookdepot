@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9875e6c990e715edf337cff815ba5efc",
+    "content-hash": "f354ddaa23c15640b7a13d27704758b0",
     "packages": [
         {
             "name": "stripe/stripe-php",
-            "version": "v7.40.0",
+            "version": "v7.44.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "04aedea5ad95b9722aa394a41787751b2b478310"
+                "reference": "b39ccc77358fbe0d462e6cc89ac01b7a0c896f35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/04aedea5ad95b9722aa394a41787751b2b478310",
-                "reference": "04aedea5ad95b9722aa394a41787751b2b478310",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/b39ccc77358fbe0d462e6cc89ac01b7a0c896f35",
+                "reference": "b39ccc77358fbe0d462e6cc89ac01b7a0c896f35",
                 "shasum": ""
             },
             "require": {
@@ -61,7 +61,7 @@
                 "payment processing",
                 "stripe"
             ],
-            "time": "2020-07-06T17:51:30+00:00"
+            "time": "2020-07-20T21:25:50+00:00"
         }
     ],
     "packages-dev": [
@@ -1538,7 +1538,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.3.7"
+        "php": ">=5.4",
+        "ext-json": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "1.1.0"

@@ -17,6 +17,7 @@ class Auth extends CI_Controller
         $userData = [
             'name' => $this->input->post('name'),
             'address' => $this->input->post('address'),
+            'phone' => $this->input->post('phone'),
             'email' => $this->input->post('email'),
             'password' => $this->input->post('password'),
             'created_at' => date("Y-m-d H:i:s")
@@ -45,6 +46,10 @@ class Auth extends CI_Controller
         if ($user) {
             session_start();
             $_SESSION['user_id'] = $user->id;
+            if (isset($_SESSION['confirm_user'])) {
+                unset($_SESSION['confirm_user']);
+                redirect('home/placeorder');
+            }
             redirect(site_url('user'));
         } else {
             redirect('home/signin');

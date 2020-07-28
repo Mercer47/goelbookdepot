@@ -6,55 +6,55 @@
 class Home extends CI_Controller
 {
 	
-	function __construct()
+	public function __construct()
 	{
 		parent::__construct();
+        $this->load->library('session');
 		$this->load->helper('url');
 		$this->load->model('Store');
         date_default_timezone_set("Asia/Kolkata");
 	}
 
-	function index()
+	public function index()
 	{
 		$data['category']=$this->Store->getcategories();
  		$this->load->view('home',$data);
 //        $this->load->view('maintenance');
 	}
 
-	function category($id,$name)
+	public function category($id,$name)
 	{
 		$data['title']=$name;
 		$data['subcategory']=$this->Store->loadsubcategories($id);
 		$this->load->view('category',$data);
 	}
 
-	function subcategory($id,$name)
+	public function subcategory($id,$name)
 	{
 		$data['title']=$name;
 		$data['topic']=$this->Store->loadtopic($id);
 		$this->load->view('topic',$data);
 	}
 
-	function loadbooks($id,$subno,$name)
+	public function loadbooks($id,$subno,$name)
 	{
 		$data['title']=$name;
 		$data['books']=$this->Store->loadbooks($id,$subno);
 		$this->load->view('books',$data);
 	}
 
-	function showbook($id)
+	public function showbook($id)
 	{
 		$data['book']=$this->Store->loadbook($id);
         $data['title']='';
 		$this->load->view('bookdetail',$data);
 	}
 
-	function cart()
+	public function cart()
 	{
 	    //initialize cart
         $data['title'] = 'Cart';
 		$this->load->database();
-		session_start();
 
 		//inserting an item to cart
 		if (isset($_POST['id']))
@@ -145,93 +145,90 @@ class Home extends CI_Controller
 		$this->load->view('cart',$data);
 	}
 
-	function search()
+	public function search()
 	{
-$this->load->database();
-$output = '';
-if(isset($_POST["query"]))
-{
- $search = $_POST['query'];
- $query = "
-  SELECT * FROM books 
-  WHERE title LIKE '%".$search."%'
-  OR Publisher LIKE '%".$search."%' 
-  OR Author LIKE '%".$search."%' 
- ";
-}
-else
-{
- $query = "
-  SELECT * FROM books ORDER BY title asc
- ";
-}
-$sql=$this->db->query($query);
-$result = $sql->result();
+        $this->load->database();
+        $output = '';
+        if(isset($_POST["query"])) {
+             $search = $_POST['query'];
+             $query = "
+              SELECT * FROM books 
+              WHERE title LIKE '%".$search."%'
+              OR Publisher LIKE '%".$search."%' 
+              OR Author LIKE '%".$search."%' 
+             ";
+        } else {
+             $query = "
+              SELECT * FROM books ORDER BY title asc
+             ";
+        }
 
-if($result!=NULL)
-{
+        $sql=$this->db->query($query);
+        $result = $sql->result();
 
-foreach($result as $row)
- {
-  echo '
-   	<div class="col-xs-6">
-	<a href="'.site_url('home/showbook/').$row->id.'">
-	<img src="'.base_url('assets/thumbnails/').$row->image.'" height="240px" width="160px" style="border-radius: 10px; border: 1px solid;">
-	<p style="font-size: 18px; padding-top: 10px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; font-weight: 500; color: black;">'.$row->title.'</p></a>
-	</div>
-  ';
- }
-}
-else
-{
- echo '<p style="font-family: RedhatR; font-size: 18px;">Not Found.</p>';
-}
-
-     
+        if($result!=NULL) {
+            foreach($result as $row) {
+                  echo '
+                    <div class="col-xs-6" style="margin-top: 20px;">
+                    <a href="'.site_url('home/showbook/').$row->id.'">
+                    <img src="'.base_url('assets/thumbnails/').$row->image.'" class="book-image">
+                    <p class="book-title">'.$row->title.'</p></a>
+                    </div>
+                  ';
+            }
+        } else {
+             echo '<p style="font-family: RedhatR; font-size: 18px;">Not Found.</p>';
+        }
 	}
 
 
-	function listcategories()
+	public function listcategories()
 	{
 	    $data['title'] = 'SHOP BY CATEGORY';
 		$data['category']=$this->Store->getcategories();
 		$this->load->view('categorylist',$data);
 	}
 
-	function examcentral()
+	public function examcentral()
 	{
         $data['title'] = 'EXAM CENTRAL';
 		$this->load->view('examcentral',$data);
 	}
 
 
-	function privacy()
+	public function privacy()
 	{
 		$this->load->view('privacy.php');
 	}
 
-	function terms()
+	public function terms()
 	{
 		$this->load->view('terms.php');
 	}
 
-	function placeorder()
+	public function placeorder()
 	{
+	    $this->load->model('Account');
 	    $data['title'] = "Enter Your Details";
-		session_start(); 
-	if (!isset($_SESSION['cart'])) {
-        redirect(site_url('home'));
-    }
-	$data['amount'] = $_SESSION['amount'];
-		$this->load->view('placeorder',$data);
+        if (!isset($_SESSION['cart'])) {
+            redirect(site_url('home'));
+        }
+        if (!isset($_SESSION['user_id'])) {
+            $_SESSION['confirm_user'] = TRUE;
+            redirect(site_url('home/signin'));
+        }
+
+        $userId = $_SESSION['user_id'];
+        $data['user'] = $this->Account->details($userId);
+        $data['amount'] = $_SESSION['amount'];
+            $this->load->view('placeorder',$data);
 	}
 
-	function payment(){
-	    session_start();
+	public function payment(){
 	    $amount = $_SESSION['amount'];
         \Stripe\Stripe::setApiKey('sk_test_51H3hLRE7tUzyZRD9bnguSMUNiPQ8rbEJy3OTdgem4Hs892xkH3N1IfTzqCWyLfpVIbluIgrSSnhb7840obP0uEyy003JnvFmLD');
         $intent = \Stripe\PaymentIntent::create([
-            'amount' => $amount,
+            'amount' => intval($amount),
             'currency' => 'inr',
             // Verify your integration in this guide by including this parameter
             'metadata' => ['integration_check' => 'accept_a_payment'],
@@ -242,43 +239,45 @@ else
         }
 
         $details = array(
+            'user_id' => $_SESSION['user_id'],
             'Name' => $this->input->post('name'),
             'Contact' => $this->input->post('contact'),
             'Email' => $this->input->post('email'),
             'Address' => $this->input->post('address'),
-            'Items' => implode(",", $_SESSION['final_cart']),
+            'Items' => json_encode($_SESSION['final_cart']),
             'Total' => $_SESSION['amount'],
             'intent_id' => $intent->id,
-            'Status' => $intent->status
+            'Status' => $intent->status,
+            'shipping_status' => 'Order Received'
         );
         $_SESSION['order_id'] = $intent->id;
         $this->Store->addOrder($details);
         $this->load->view('checkout',$data);
     }
 
-	function thanks()
+	public function thanks()
 	{
-		session_start();
-
 	if (!isset($_SESSION['cart'])) {
-    redirect(site_url('home'));
-		}
-
-		$this->load->view('thanks');
-		session_destroy();
+        redirect(site_url('home'));
+	}
+		$this->load->view('user');
 	}
 
-	function contact()
+	public function contact()
 	{
 	    $data['title'] = 'Contact Us';
 		$this->load->view('contact',$data);
 	}
 
-	function signIn(){
-	    $this->load->view('auth/signin');
+	public function signIn(){
+	    if (isset($_SESSION['user_id'])) {
+	        redirect(site_url('user'));
+        } else {
+            $this->load->view('auth/signin');
+        }
     }
 
-    function register(){
+    public function register(){
 	    $this->load->view('auth/register');
     }
 }

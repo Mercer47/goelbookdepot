@@ -6,13 +6,23 @@
     <script src="https://js.stripe.com/v3/"></script>
 </head>
 <style>
+    @font-face{
+        font-family: Nunito-regular;
+        src: url(<?php echo base_url('assets/fonts/Nunito-regular.ttf'); ?>);
+    }
+
+    @font-face{
+        font-family: Questrial-regular;
+        src: url(<?php echo base_url('assets/fonts/Questrial-regular.ttf'); ?>);
+    }
+</style>
+<style>
     /**
  * The CSS shown here will not be introduced in the Quickstart guide, but shows
  * how you can use CSS to style your Element's container.
  */
     .StripeElement {
         box-sizing: border-box;
-
         height: 40px;
 
         padding: 10px 12px;
@@ -37,11 +47,31 @@
     .StripeElement--webkit-autofill {
         background-color: #fefde5 !important;
     }
+    #card-button {
+        background: #f95555;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        margin-top: 20px;
+        width: 100%;
+        line-height: 40px;
+        font-family: Questrial-regular, serif;
+        font-size: 18px;
+    }
+
+    .checkout-heading
+    {
+        font-family: Questrial-regular, serif;
+        font-size: 30px;
+        width: 100%;
+        padding-left: 10px;
+    }
 </style>
 <body>
 
     <div class="row">
         <div class="col-md-12">
+            <p class="checkout-heading">Complete Your Payment</p>
             <form id="payment-form">
                 <div id="card-element">
                     <!-- Elements will create input elements here -->
@@ -50,8 +80,7 @@
                 <!-- We'll put the error messages in this element -->
                 <div id="card-errors" role="alert"></div>
                 <input type="hidden" name="client" id="client" value="<?php echo $intent->client_secret; ?>">
-
-                <button id="card-button">Pay</button>
+                    <button id="card-button">Pay</button>
             </form>
         </div>
     </div>
@@ -100,7 +129,7 @@
             } else {
                 // The payment has been processed!
                 if (result.paymentIntent.status === 'succeeded') {
-                    window.location.href = '<?php echo site_url('home/thanks') ?>'
+                    window.location.href = '<?php echo site_url('user') ?>'
                     // Show a success message to your customer
                     // There's a risk of the customer closing the window before callback
                     // execution. Set up a webhook or plugin to listen for the

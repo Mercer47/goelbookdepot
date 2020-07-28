@@ -159,6 +159,9 @@ ul#nav li{
 
 .book-title{
 	margin-top: 10px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 .book-detail{
@@ -279,6 +282,70 @@ ul#nav li{
 ::-webkit-scrollbar-thumb:hover {
 	background: #555;
 }
+
+.orders-item
+{
+	margin-bottom: 20px;
+	margin-top: 10px;
+	font-family: Questrial-regular, sans-serif;
+}
+
+.purchase-info
+{
+	font-size: 11px;
+	color: #00CC00;
+}
+
+.account-details-heading
+{
+	font-size: 18px;
+	font-family: Questrial-regular, serif;
+}
+
+.account-detail-label
+{
+	font-family: Questrial-regular, serif;
+	font-size: 14px;
+	margin-top: 20px;
+}
+
+.account-detail
+{
+	font-family: Questrial-regular, serif;
+	font-size: 14px;
+	color: #f95555;
+}
+
+.empty
+{
+	font-family: Questrial-regular, serif;
+	font-size: 20px;
+	background-image: url("../icons/empty.png");
+	background-size: 40%;
+	background-repeat: no-repeat;
+	background-position-x: 50%;
+	line-height: 200px;
+	text-align: center ;
+	padding-top: 60px;
+}
+
+.failed-text
+{
+	color: #f95555;
+	font-size: 12px;
+	margin: 0!important;
+}
+
+.success-text
+{
+	color: #00CC00;
+	font-size: 12px;
+}
+
+
+
+
+
 
 @media screen and (min-width: 700px) {
 	.site-heading{

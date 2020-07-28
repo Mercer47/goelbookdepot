@@ -6,6 +6,8 @@
         <input type="text" name="name" class="form-input">
         <p class="form-heading">ADDRESS</p>
         <input type="text" name="address" class="form-input">
+        <p class="form-heading">PHONE</p>
+        <input type="text" name="phone" class="form-input">
         <p class="form-heading">EMAIL</p>
         <input type="text" name="email" class="form-input" />
         <p class="form-heading">PASSWORD</p>
