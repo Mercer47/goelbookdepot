@@ -241,7 +241,7 @@
         <a href="<?php echo site_url('home/listcategories') ?>"><i class="las la-tags"></i>  Shop by Category</a>
         <a href="<?php echo site_url('home/examcentral') ?>"><i class="las la-crosshairs"></i>  Exam Central</a>
         <a href=""<?php echo site_url('home/comingsoon') ?>""><i class="las la-retweet"></i>  Used books at 50%</a>
-        <a href=""<?php echo site_url('home/comingsoon') ?>""><i class="las la-book"></i>  Bundle Store</a>
+        <a href="<?php echo site_url('bundle') ?>"><i class="las la-book"></i>  Bundle Store</a>
         <a href=""<?php echo site_url('home/privacy') ?>"><i class="las la-user-secret"></i>  Privacy Policy</a>
         <a href="<?php echo site_url('home/terms') ?>"><i class="las la-list-alt"></i>  Terms & Conditions</a>
         <a href="<?php echo site_url('home/contact') ?>"><i class="las la-tty"></i>  Contact Us</a>

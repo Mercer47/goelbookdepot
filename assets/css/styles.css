@@ -103,6 +103,7 @@ ul#nav li{
 	line-height: 40px;
 	font-size: 20px;
 	padding: 10px 0 0 0;
+	z-index: 100 !important;
 }
 
 .nav-page i {
@@ -112,6 +113,9 @@ ul#nav li{
 
 .page-title{
 	font-family: Questrial-regular, serif;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 .category-container{
@@ -344,7 +348,10 @@ ul#nav li{
 	font-size: 12px;
 }
 
-
+.bundle-wrapper
+{
+	padding-top: 50px;
+}
 
 
 
@@ -513,7 +520,7 @@ ul#nav li{
 	}
 	.nav-page{
 		position: fixed;
-		z-index: 100;
+		z-index: 100 !important;
 	}
 	.body-content{
 		padding: 70px 0 70px 0 !important;
