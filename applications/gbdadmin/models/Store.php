@@ -116,8 +116,13 @@ class Store extends CI_Model
 
         $this -> db -> where('id', $id);
         $this -> db -> delete('bookcat');
+    }
 
-
+    public function changeShippingStatus($status, $orderId)
+    {
+        $this->db->set('shipping_status', $status);
+        $this->db->where('OrderId', $orderId);
+        $this->db->update('orders');
     }
 
 }

@@ -2,7 +2,7 @@
 
 foreach($data as $row)
 {
-    $items=explode(",", $row->Items);
+    $items = json_decode($row->Items);
 }
 ?>
 <!DOCTYPE html>
@@ -23,6 +23,18 @@ foreach($data as $row)
 <p>Address: <?php echo $row->Address;  ?></p>
 <p>Email: <?php echo $row->Email;  ?></p>
 <p>Date/Time: <?php echo date('d-M Y H:i A ',strtotime($row->Timestamp)); ?></p>
+    <form method="POST" action="<?php echo site_url('home/changeShippingStatus') ?>">
+        <p>Shipping Status</p>
+        <input type="hidden" name="order_id" value="<?php echo $row->OrderId; ?>"  />
+        <select name="shipping_status">
+            <option value="<?php echo $row->shipping_status ?>" selected><?php echo $row->shipping_status ?></option>
+            <option value="Shipped">Shipped</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Canceled">Canceled</option>
+            <option value="Order Received">Order Received</option>
+        </select>
+        <button>Update Status</button>
+    </form>
 <?php } ?>
 <table class="table table-responsive">
     <tr>

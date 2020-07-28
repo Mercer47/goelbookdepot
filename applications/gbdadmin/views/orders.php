@@ -11,6 +11,7 @@
                     <th>Email</th>
                     <th>Contact</th>
                     <th>Payment Status</th>
+                    <th>Shipping Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -25,6 +26,7 @@
                 <td><?php echo $row->Email; ?></td>
                 <td><?php echo $row->Contact; ?></td>
                 <td><?php echo $row->Status; ?></td>
+                <td><?php echo $row->shipping_status ?></td>
                 <td><i class="las la-eye" onclick="location.href='<?php echo site_url('home/generateinvoice/') . $row->OrderId; ?>'" style="cursor: pointer; font-size: 20px;" title="View"></i></td>
             </tr>
             <?php } ?>
