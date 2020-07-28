@@ -1,5 +1,5 @@
 <?php $this->view('header'); ?>
-<div class="col-md-9">
+<div class="col-md-10">
     <style type="text/css">
         input, select {
             border: 1px solid;

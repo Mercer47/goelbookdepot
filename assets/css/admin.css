@@ -207,3 +207,16 @@ input[type="file"] {
     font-family: Questrial-regular, serif;
     border-radius: 5px;
 }
+
+.bundle-wrapper
+{
+    margin-top: 30px;
+}
+
+.bundle-item-title
+{
+    padding: 20px 0 0 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}

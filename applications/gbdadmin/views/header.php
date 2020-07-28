@@ -28,6 +28,7 @@
         <a href="<?php echo site_url('home/orders'); ?>"><i class="las la-shipping-fast"></i> Orders</a><br><br>
         <a href="<?php echo site_url('home/settings') ?>"><i class="las la-cog"></i> Settings</a><br><br>
         <a href="<?php echo site_url('home/inventory') ?>"><i class="las la-warehouse"></i> Inventory</a><br><br>
+        <a href="<?php echo site_url('home/bundles') ?>"><i class="lab la-buffer"></i> Bundles</a><br><br>
         <a href="<?php echo site_url('home/logout') ?>"><i class="las la-sign-out-alt"></i> Logout</a>
     </div>
 </div>

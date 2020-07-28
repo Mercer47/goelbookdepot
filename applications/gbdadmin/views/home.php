@@ -12,6 +12,10 @@
         <i class="las la-warehouse"></i>
         INVENTORY
     </div>
+    <div class="col-md-5 admin-home-nav"  onclick="location.href='<?php echo site_url('home/bundles') ?>'">
+        <i class="lab la-buffer"></i>
+        BUNDLES
+    </div>
     <div class="col-md-5 admin-home-nav"  onclick="location.href='<?php echo site_url('home/logout') ?>'">
         <i class="las la-sign-out-alt"></i>
         LOGOUT

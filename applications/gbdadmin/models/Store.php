@@ -125,6 +125,37 @@ class Store extends CI_Model
         $this->db->update('orders');
     }
 
+    public function createBundle($bundle)
+    {
+        $this->db->insert('bundles', $bundle);
+    }
+
+    public function getBundles()
+    {
+        $query = $this->db->get('bundles');
+        return $query->result();
+    }
+
+    public function getBundle($id)
+    {
+        $query = $this->db->get_where('bundles',array('id' => $id));
+        return $query->first_row();
+    }
+
+    public function getBookCost($id)
+    {
+        $this->db->select('MRP');
+        $query = $this->db->get_where('books',array('id' => $id));
+        $book = $query->first_row();
+        return $book->MRP;
+    }
+
+    public function deleteBundle($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('bundles');
+    }
+
 }
 
 ?>

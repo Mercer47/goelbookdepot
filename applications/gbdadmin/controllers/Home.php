@@ -472,6 +472,49 @@ class Home extends CI_Controller
         redirect(site_url('home/orders'));
     }
 
+    public function bundles()
+    {
+        $data['bundles'] = $this->Store->getBundles();
+        $this->load->view('bundle/list',$data);
+    }
+
+    public function createBundle()
+    {
+        $data['books'] = $this->Store->getBooks();
+        $this->load->view('bundle/create',$data);
+    }
+
+    public function insertBundle()
+    {
+        $bundle = array(
+            'name' => $this->input->post('name'),
+            'books' => json_encode($this->input->post('bundle_item')),
+            'price' => $this->input->post('effective_price'),
+            'discount' => $this->input->post('discount'),
+            'gift' => $this->input->post('gift')
+        );
+        $this->Store->createBundle($bundle);
+        redirect(site_url('home/bundles'));
+    }
+
+    public function loadBundle($id)
+    {
+        $data['bundle'] = $this->Store->getBundle($id);
+        $this->load->view('bundle/view', $data);
+    }
+
+    public function deleteBundle($id)
+    {
+        $this->Store->deleteBundle($id);
+        redirect(site_url('home/bundles'));
+    }
+
+    public function getBookCost()
+    {
+        $bookId = $_POST['id'];
+        print_r($this->Store->getBookCost($bookId));
+    }
+
     public function logout()
     {
         session_start();

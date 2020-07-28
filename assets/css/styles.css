@@ -68,7 +68,7 @@ ul#nav li{
 	font-size: 25px;
 	color: #ffffff;
 	position: relative;
-	top: 10px;
+	top: 20px !important;
 	cursor: pointer;
 }
 
@@ -123,6 +123,7 @@ ul#nav li{
 	text-align: center;
 	font-size: 20px;
 	text-overflow: ellipsis;
+	white-space: nowrap;
 	overflow: hidden;
 }
 
@@ -137,6 +138,7 @@ ul#nav li{
 	text-align: center;
 	font-size: 15px;
 	text-overflow: ellipsis;
+	white-space: nowrap;
 	overflow: hidden;
 }
 
@@ -515,6 +517,9 @@ ul#nav li{
 	}
 	.body-content{
 		padding: 70px 0 70px 0 !important;
+	}
+	.nav-icon {
+		top: 10px !important;
 	}
 
 }
