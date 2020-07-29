@@ -40,6 +40,13 @@ class BundleModel extends CI_Model
         return $this->db->get_where('bundles',array('id' => $id))->first_row()->price;
     }
 
+    /**
+     *
+     * Gets the respective row from the books table
+     *
+     * @param $id
+     * @return mixed
+     */
     public  function getReferredData($id)
     {
         $sql = 'SELECT books.id,books.availability FROM books,bundles WHERE books.title = bundles.name AND bundles.id = ?';

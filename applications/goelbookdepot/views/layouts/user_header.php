@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="theme-color" content="#f95555">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>Goel Book Depot | Get all college, school books at Discounted price | All competetion books available.</title>
     <link rel="shortcut icon" href="<?php echo base_url('assets/css/icons/comic.png') ?>">

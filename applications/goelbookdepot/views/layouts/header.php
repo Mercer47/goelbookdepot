@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="theme-color" content="#f95555">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>Goel Book Depot | Get all college, school books at Discounted price | All competetion books available.</title>
     <link rel="shortcut icon" href="<?php echo base_url('assets/css/icons/comic.png') ?>">
@@ -242,7 +243,7 @@
         <a href="<?php echo site_url('home/examcentral') ?>"><i class="las la-crosshairs"></i>  Exam Central</a>
         <a href=""<?php echo site_url('home/comingsoon') ?>""><i class="las la-retweet"></i>  Used books at 50%</a>
         <a href="<?php echo site_url('bundle') ?>"><i class="las la-book"></i>  Bundle Store</a>
-        <a href=""<?php echo site_url('home/privacy') ?>"><i class="las la-user-secret"></i>  Privacy Policy</a>
+        <a href="<?php echo site_url('home/privacy') ?>"><i class="las la-user-secret"></i>  Privacy Policy</a>
         <a href="<?php echo site_url('home/terms') ?>"><i class="las la-list-alt"></i>  Terms & Conditions</a>
         <a href="<?php echo site_url('home/contact') ?>"><i class="las la-tty"></i>  Contact Us</a>
     </div>

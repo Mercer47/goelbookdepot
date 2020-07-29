@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="theme-color" content="#f95555">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Goel Book Depot</title>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">

@@ -220,3 +220,26 @@ input[type="file"] {
     white-space: nowrap;
     overflow: hidden;
 }
+
+.graph
+{
+    font-family: Questrial-regular, serif;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.graph-heading
+{
+    font-size: 20px;
+    color: #2995bf;
+}
+
+#daterange
+{
+    background-image: url("../icons/range.png");
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position-y: 50%;
+    background-position-x: 95%;
+    cursor: pointer;
+}

@@ -228,7 +228,7 @@ class Home extends CI_Controller
 	}
 
 	public function payment(){
-	    $amount = $_SESSION['amount'];
+	    $amount = $_SESSION['amount']."00";
         \Stripe\Stripe::setApiKey('sk_test_51H3hLRE7tUzyZRD9bnguSMUNiPQ8rbEJy3OTdgem4Hs892xkH3N1IfTzqCWyLfpVIbluIgrSSnhb7840obP0uEyy003JnvFmLD');
         $intent = \Stripe\PaymentIntent::create([
             'amount' => intval($amount),
@@ -251,7 +251,8 @@ class Home extends CI_Controller
             'Total' => $_SESSION['amount'],
             'intent_id' => $intent->id,
             'Status' => $intent->status,
-            'shipping_status' => 'Order Received'
+            'shipping_status' => 'Order Received',
+            'Timestamp' => date("Y-m-d H:i:s")
         );
         $_SESSION['order_id'] = $intent->id;
         $this->Store->addOrder($details);
