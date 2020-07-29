@@ -353,7 +353,22 @@ ul#nav li{
 	padding-top: 50px;
 }
 
+.add-sign
+{
+	text-align: center;
+	font-size: 40px;
+	color: #f95555;
+	font-family: Questrial-regular, serif;
+	padding: 20px 0 20px 0;
+}
 
+.gift-box
+{
+	font-size: 20px;
+	text-align: center;
+	font-family: Questrial-regular, serif;
+	color: #00CC00;
+}
 
 
 @media screen and (min-width: 700px) {

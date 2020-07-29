@@ -5,7 +5,7 @@
             <div class="col-md-12 category-container">
                 <?php echo $bundle->name ?>
                 <br/>
-                <?php echo "Only for ₹".$bundle->price." (".$bundle->discount."% off)" ?>
+                <?php echo "Only for ₹".$bundle->effective_price." (".$bundle->discount."% off)" ?>
                 <br/>
                 <?php echo $bundle->gift ?>
             </div>

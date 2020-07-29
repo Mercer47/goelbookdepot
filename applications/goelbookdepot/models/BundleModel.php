@@ -28,4 +28,24 @@ class BundleModel extends CI_Model
     {
         return $this->db->get_where('bundles', array('id' => $id))->first_row();
     }
+
+    /**
+     * gives the bundle cost
+     * @param $id
+     * @return mixed
+     */
+    public function getBundleCost($id)
+    {
+        $this->db->select('price');
+        return $this->db->get_where('bundles',array('id' => $id))->first_row()->price;
+    }
+
+    public  function getReferredData($id)
+    {
+        $sql = 'SELECT books.id,books.availability FROM books,bundles WHERE books.title = bundles.name AND bundles.id = ?';
+        $query = $this->db->query($sql,$id);
+        return $query->first_row();
+    }
+
+
 }

@@ -10,7 +10,26 @@
                 <p><?php echo $book->title ?></p>
             </div>
         </div>
+    <div class="col-xs-12 add-sign">
+        +
+    </div>
     <?php } ?>
-
+    <div class="col-xs-12 gift-box">
+        <?= $bundle->gift ? $bundle->gift : 'Free Best Wishes'  ?>
+    </div>
+    <div class="col-xs-12 add-sign">
+        =
+    </div>
+    <div class="col-xs-12 gift-box">
+        <?php echo "Only for ₹".$bundle->effective_price." (".$bundle->discount."% off)" ?>
+        <?php if ($bundleAsBook->availability) {?>
+            <form method="POST" action="<?php echo site_url('home/cart') ?>">
+                <input type="hidden" name="id" value="<?php echo $bundleAsBook->id; ?>">
+                <button class="btn-add-cart"><i class="las la-cart-plus"></i> Add to Cart </button>
+            </form>
+        <?php } else { ?>
+            <button class="btn-add-cart"><i class="las la-exclamation-triangle"></i> Out of Stock </button>
+        <?php } ?>
+    </div>
 
 <?php $this->view('layouts/inner_page_footer') ?>

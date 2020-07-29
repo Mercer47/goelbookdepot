@@ -489,8 +489,9 @@ class Home extends CI_Controller
         $bundle = array(
             'name' => $this->input->post('name'),
             'books' => json_encode($this->input->post('bundle_item')),
-            'price' => $this->input->post('effective_price'),
+            'price' => $this->input->post('price'),
             'discount' => $this->input->post('discount'),
+            'effective_price' => $this->input->post('effective_price'),
             'gift' => $this->input->post('gift')
         );
         $this->Store->createBundle($bundle);

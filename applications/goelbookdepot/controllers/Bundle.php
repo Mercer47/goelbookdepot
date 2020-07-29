@@ -7,6 +7,7 @@ class Bundle extends CI_Controller
     {
         parent::__construct();
         $this->load->model('BundleModel');
+        $this->load->library('session');
     }
 
     public function index()
@@ -18,10 +19,9 @@ class Bundle extends CI_Controller
 
     public function view($id)
     {
+        $data['bundleAsBook'] = $this->BundleModel->getReferredData($id);
         $data['bundle'] = $this->BundleModel->getBundle($id);
         $data['title'] = $data['bundle']->name;
         $this->load->view('bundles/view',$data);
     }
-
-
 }

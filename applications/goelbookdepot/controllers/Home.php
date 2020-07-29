@@ -93,6 +93,9 @@ class Home extends CI_Controller
                 if ($value==$delid) {
                     unset($_SESSION['cart'][$key]);
                     unset($_SESSION['cost'][$delid]);
+                    if (isset($_SESSION['final_cart'])) {
+                        unset($_SESSION['final_cart'][$key]);
+                    }
                 }
             }
         }

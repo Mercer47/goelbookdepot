@@ -7,7 +7,7 @@
                     <p class="book-form-heading">Name</p>
                     <input type="text" name="name" class="book-form-input" required>
                 <p class="book-form-heading">Price</p>
-                <input type="text" class="book-form-input" id="price" readonly>
+                <input type="text" class="book-form-input" name="price" id="price" readonly>
                 <p class="book-form-heading">Gift</p>
                 <input type="text" class="book-form-input" name="gift">
             </div>

@@ -128,6 +128,18 @@ class Store extends CI_Model
     public function createBundle($bundle)
     {
         $this->db->insert('bundles', $bundle);
+        $this->addBundleToBooks($bundle);
+    }
+
+    public function addBundleToBooks($bundle)
+    {
+        $bundleAsBook = array(
+            'title' => $bundle['name'],
+            'MRP' => $bundle['price'],
+            'Discount' => $bundle['discount']
+        );
+
+        $this->insertbook($bundleAsBook);
     }
 
     public function getBundles()
