@@ -9,6 +9,13 @@ class StatsModel extends CI_Model
         $this->load->database();
     }
 
+    /**
+     * Retrieves the dates for Graph acc to given Start Date and End Date
+     *
+     * @param $startDate
+     * @param $endDate
+     * @return array
+     */
     public function getOrderStats($startDate, $endDate)
     {
         $output = array();
@@ -25,6 +32,14 @@ class StatsModel extends CI_Model
         return $output;
     }
 
+    /**
+     *
+     * Retrieves no. of orders for a given duration
+     *
+     * @param $start
+     * @param $end
+     * @return mixed
+     */
     public function getOrderDateRange($start, $end)
     {
         $sql = 'SELECT * FROM orders WHERE Timestamp > ? AND Timestamp < ?';
@@ -32,6 +47,14 @@ class StatsModel extends CI_Model
         return $query->num_rows();
     }
 
+    /**
+     *
+     * Retrieves Dates for Customer acquisition graph
+     *
+     * @param $startDate
+     * @param $endDate
+     * @return array
+     */
     public function getCustomerData($startDate, $endDate)
     {
         $output = array();
@@ -48,6 +71,14 @@ class StatsModel extends CI_Model
         return $output;
     }
 
+    /**
+     *
+     * Retrieves no. of customers acquired in a duration
+     *
+     * @param $start
+     * @param $end
+     * @return mixed
+     */
     public function getCustomerDateRange($start, $end)
     {
         $sql = 'SELECT * FROM users WHERE created_at > ? AND created_at < ?';
@@ -55,6 +86,14 @@ class StatsModel extends CI_Model
         return $query->num_rows();
     }
 
+    /**
+     *
+     * Prepares Data for Sales Graph
+     *
+     * @param $startDate
+     * @param $endDate
+     * @return array
+     */
     public function getSalesData($startDate, $endDate)
     {
         $output = array();
@@ -71,6 +110,14 @@ class StatsModel extends CI_Model
         return $output;
     }
 
+    /**
+     *
+     * Retrieves Sales made by particular day for a given duration
+     *
+     * @param $start
+     * @param $end
+     * @return int
+     */
     public function getSalesDateRange($start, $end)
     {
         $sql = 'SELECT SUM(Total) FROM orders WHERE Timestamp > ? AND Timestamp < ?';
