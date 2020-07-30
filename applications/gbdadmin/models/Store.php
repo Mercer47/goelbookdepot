@@ -6,20 +6,20 @@
 class Store extends CI_Model
 {
 	
-	function __construct()
+	public function __construct()
 	{
 		parent::__construct();
 		$this->load->database();
 	}
 
-	function fetchorders()
+	public function fetchorders()
 	{
 		$query=$this->db->query('SELECT * FROM orders ORDER BY Timestamp DESC');
 		$result=$query->result();
 		return $result;
 	}
 
-	function fetchinvoicedata($id)
+	public function fetchinvoicedata($id)
 	{
 		$sql='SELECT * FROM orders WHERE OrderId=?';
 		$query=$this->db->query($sql,$id);
@@ -27,26 +27,26 @@ class Store extends CI_Model
 		return $result;
 	}
 
-	function getbooks()
+	public function getbooks()
 	{
 		$sql=$this->db->query('SELECT * FROM books ORDER BY Timestamp DESC');
 		$result=$sql->result();
 		return $result;
 	}
 
-		function getcategories()
+	public function getcategories()
 	{
 		$query=$this->db->query('SELECT * FROM bookcat');
 		$result=$query->result();
 		return $result;
 	}
 
-	function insertbook($data)
+	public function insertbook($data)
 	{
 		$this->db->insert('books',$data);
 	}
 
-	function getbookdetails($id)
+	public function getbookdetails($id)
 	{
 		$sql='SELECT * FROM books WHERE id=?';
 		$query=$this->db->query($sql,$id);
@@ -54,50 +54,50 @@ class Store extends CI_Model
 		return $result;
 	}
 
-	function updatebook($data,$id)
+	public function updatebook($data,$id)
 	{
 		$this->db->where('id',$id);
 		$this->db->update('books',$data);
 	}
 
-	function deletebook($id)
+	public function deletebook($id)
 	{
 		$sql='DELETE FROM books WHERE id=?';
 		$query=$this->db->query($sql,$id);
 	}
 
-	function loadClasses($id){
+	public function loadClasses($id){
 	    $sql='SELECT * FROM booksubsub WHERE subno = ?';
 	    $query = $this->db->query($sql,$id);
 	    $result=$query->result();
 	    return $result;
     }
 
-    function loadSubjects($id){
+    public function loadSubjects($id){
         $sql='SELECT * FROM subject WHERE subno = ?';
         $query = $this->db->query($sql,$id);
         $result=$query->result();
         return $result;
     }
 
-    function addNewCategory($data){
+    public function addNewCategory($data){
 	    $this->db->insert('bookcat',$data);
     }
 
-    function addnewClass($data){
+    public function addnewClass($data){
 	    $this->db->insert('booksubsub',$data);
     }
 
-    function addnewSubject($data){
+    public function addnewSubject($data){
         $this->db->insert('subject',$data);
     }
 
-    function deleteSubject($id){
+    public function deleteSubject($id){
         $this -> db -> where('id', $id);
         $this -> db -> delete('subject');
     }
 
-    function deleteClass($id){
+    public function deleteClass($id){
         $this -> db -> where('id', $id);
         $this -> db -> delete('booksubsub');
 
@@ -105,7 +105,7 @@ class Store extends CI_Model
         $this->db->delete('subject');
     }
 
-    function deleteCategory($id){
+    public function deleteCategory($id){
         $sql='SELECT * FROM booksubsub WHERE subno = ?';
         $query=$this->db->query($sql,$id);
         $result=$query->result();
@@ -136,7 +136,8 @@ class Store extends CI_Model
         $bundleAsBook = array(
             'title' => $bundle['name'],
             'MRP' => $bundle['price'],
-            'Discount' => $bundle['discount']
+            'Discount' => $bundle['discount'],
+            'image' => $bundle['image'],
         );
 
         $this->insertbook($bundleAsBook);
@@ -164,8 +165,24 @@ class Store extends CI_Model
 
     public function deleteBundle($id)
     {
+        $bundleAsBook = $this->getReferredData($id);
+        $this->deletebook($bundleAsBook->id);
         $this->db->where('id', $id);
         $this->db->delete('bundles');
+    }
+
+    /**
+     *
+     * Gets the respective row from the books table
+     *
+     * @param $id
+     * @return mixed
+     */
+    public  function getReferredData($id)
+    {
+        $sql = 'SELECT books.id,books.availability FROM books,bundles WHERE books.title = bundles.name AND bundles.id = ?';
+        $query = $this->db->query($sql,$id);
+        return $query->first_row();
     }
 
 }

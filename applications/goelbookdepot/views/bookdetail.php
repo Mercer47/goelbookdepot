@@ -22,10 +22,10 @@
             <div class="col-xs-12 col-lg-6 book-detail">
                 <p><?php echo $row->title; ?></p>
                 <p>MRP: ₹<?php echo $row->MRP; ?></p><?php $price = 0;
-                $price = $row->MRP - $row->Discount / 100 * $row->MRP;
+                $price = $row->MRP - ($row->Discount / 100) * $row->MRP;
                 ?>
                 <p style="color: #00CC00">Your Price:
-                    ₹<?php echo intval($price) . " (" . $row->Discount . "% off" . ")"; ?></p>
+                    ₹<?php echo ceil($price) . " (" . $row->Discount . "% off" . ")"; ?></p>
                 <p style="color:#fbc02d;">+ Shipping Charges: ₹<?php echo $row->charges ? $row->charges : 0; ?></p>
                 <p style="color: #00CC00">You Save: ₹<?php echo intval($row->MRP - $price); ?></p>
                 <div class="col-xs-12 col-lg-6 ">

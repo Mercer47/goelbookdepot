@@ -231,7 +231,9 @@ input[type="file"] {
 .graph-heading
 {
     font-size: 20px;
-    color: #2995bf;
+    color: #ffffff;
+    background: #2995bf;
+    padding: 10px 0 10px 20px;
 }
 
 #daterange

@@ -255,6 +255,7 @@ class Home extends CI_Controller
             'Timestamp' => date("Y-m-d H:i:s")
         );
         $_SESSION['order_id'] = $intent->id;
+        $data['customerName'] = $details['Name'];
         $this->Store->addOrder($details);
         $this->load->view('checkout',$data);
     }

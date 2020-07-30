@@ -61,7 +61,7 @@ foreach($data as $row)
            <td><?php echo $row->MRP; ?></td>
             <td><?php echo $row->Discount."%"; ?></td>
             <td><?php echo $row->charges; ?></td>
-            <td><?php echo $row->MRP-ceil(($row->Discount/100)*$row->MRP)+($row->charges); ?></td>
+            <td><?php echo $row->MRP-floor(($row->Discount/100)*$row->MRP)+($row->charges); ?></td>
         </tr>
         <?php
     }

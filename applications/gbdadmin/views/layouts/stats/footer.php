@@ -4,7 +4,9 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <script>
-    $('input[name="daterange"]').daterangepicker();
+    $('input[name="daterange"]').daterangepicker({
+        maxDate: '<?php echo date("m/d/Y")  ?>'
+    });
     $('#daterange').on('apply.daterangepicker', function(ev, picker) {
         $.ajax({
             url: '<?php echo site_url('stats/getData') ?>',

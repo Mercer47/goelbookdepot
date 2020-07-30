@@ -486,13 +486,42 @@ class Home extends CI_Controller
 
     public function insertBundle()
     {
+        $config['upload_path'] = './assets/images/';
+        $config['allowed_types'] = 'gif|jpeg|png|jpg|bmp';
+        $config['max_size'] = 20000;
+        $config['max_width'] = 10000;
+        $config['max_height'] = 10000;
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload('cover')) {
+            $error = array('error' => $this->upload->display_errors());
+            $img = null;
+            print_r($error);
+        } else {
+            $data = array('upload_data' => $this->upload->data());
+            $img = $data['upload_data']['file_name'];
+            $config1['image_library'] = 'gd2';
+            $config1['source_image'] = './assets/images/' . $img;
+            $config1['new_image'] = './assets/thumbnails/';
+            $config1['create_thumb'] = true;
+            $config1['maintain_ratio'] = true;
+            $config1['thumb_marker'] = '';
+            $config1['width'] = 300;
+            $config1['height'] = 600;
+
+            $this->load->library('image_lib', $config1);
+
+            $this->image_lib->resize();
+        }
+
         $bundle = array(
             'name' => $this->input->post('name'),
             'books' => json_encode($this->input->post('bundle_item')),
             'price' => $this->input->post('price'),
             'discount' => $this->input->post('discount'),
             'effective_price' => $this->input->post('effective_price'),
-            'gift' => $this->input->post('gift')
+            'gift' => $this->input->post('gift'),
+            'image' => $img,
         );
         $this->Store->createBundle($bundle);
         redirect(site_url('home/bundles'));

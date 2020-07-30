@@ -2,12 +2,12 @@
 
 <div class="col-md-10">
     <div class="col-md-12 add-book-wrapper" style="padding: 30px;">
-        <form method="POST" action="<?php echo site_url('home/insertBundle') ?>">
+        <form method="POST" action="<?php echo site_url('home/insertBundle') ?>" enctype="multipart/form-data">
             <div class="col-md-6" align="left">
                     <p class="book-form-heading">Name</p>
                     <input type="text" name="name" class="book-form-input" required>
                 <p class="book-form-heading">Price</p>
-                <input type="text" class="book-form-input" name="price" id="price" readonly>
+                <input type="text" class="book-form-input" name="price" id="price" readonly required>
                 <p class="book-form-heading">Gift</p>
                 <input type="text" class="book-form-input" name="gift">
             </div>
@@ -15,7 +15,10 @@
                 <p class="book-form-heading">Discount</p>
                 <input type="number" min="0" name="discount" id="discount" class="book-form-input" required>
                 <p class="book-form-heading">Effective Price</p>
-                <input type="text" class="book-form-input" name="effective_price" id="effective_price" readonly>
+                <input type="text" class="book-form-input" name="effective_price" id="effective_price" readonly required>
+                <p class="book-form-heading">Cover Image</p>
+                <label for="cover" class="custom-file-upload"></label>
+                <input type="file" id="cover" name="cover" class="book-form-input" required>
             </div>
             <div class="col-md-12 bundle-wrapper">
                 <table class="table table-responsive" id="table">
