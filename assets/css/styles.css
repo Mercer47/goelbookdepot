@@ -329,10 +329,14 @@ ul#nav li{
 	background-image: url("../icons/empty.png");
 	background-size: 40%;
 	background-repeat: no-repeat;
+	margin-top: 100px;
 	background-position-x: 50%;
 	line-height: 200px;
 	text-align: center ;
-	padding-top: 60px;
+}
+
+.empty p{
+	margin-top: 80px;
 }
 
 .failed-text
@@ -368,6 +372,15 @@ ul#nav li{
 	text-align: center;
 	font-family: Questrial-regular, serif;
 	color: #00CC00;
+}
+
+.error-bar
+{
+	font-family: Questrial-regular, serif;
+	text-align: center;
+	color: #f95555;
+	font-size: 16px;
+	margin-top: 10px;
 }
 
 

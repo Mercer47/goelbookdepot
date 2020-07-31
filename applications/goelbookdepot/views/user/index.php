@@ -20,7 +20,7 @@
         <?php } ?>
     <?php } else { ?>
         <div class="col-xs-12 empty">
-            Your Orders Appear here
+            <p style="">Your Orders Appear here</p>
         </div>
     <?php } ?>
 <?php $this->view('layouts/user_footer') ?>

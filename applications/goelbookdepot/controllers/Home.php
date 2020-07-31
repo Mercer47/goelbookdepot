@@ -180,7 +180,7 @@ class Home extends CI_Controller
                   ';
             }
         } else {
-             echo '<p style="font-family: RedhatR; font-size: 18px;">Not Found.</p>';
+             echo '<div class="error-bar">No Match Found.</div>';
         }
 	}
 
@@ -233,8 +233,8 @@ class Home extends CI_Controller
         $intent = \Stripe\PaymentIntent::create([
             'amount' => intval($amount),
             'currency' => 'inr',
-            // Verify your integration in this guide by including this parameter
-            'metadata' => ['integration_check' => 'accept_a_payment'],
+            'payment_method_types' => ['card'],
+            'receipt_email' => 'macmershimla@gmail.com',
         ]);
         $data['intent'] = $intent;
         if (!isset($_SESSION['cart'])) {
@@ -274,7 +274,9 @@ class Home extends CI_Controller
 		$this->load->view('contact',$data);
 	}
 
-	public function signIn(){
+	public function signIn()
+    {
+        $this->load->library('form_validation');
 	    if (isset($_SESSION['user_id'])) {
 	        redirect(site_url('user'));
         } else {
@@ -282,7 +284,9 @@ class Home extends CI_Controller
         }
     }
 
-    public function register(){
+    public function register()
+    {
+        $this->load->library('form_validation');
 	    $this->load->view('auth/register');
     }
 }

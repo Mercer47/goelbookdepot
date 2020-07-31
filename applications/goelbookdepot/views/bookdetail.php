@@ -2,22 +2,22 @@
     <div class="col-lg-12">
         <?php foreach ($book as $row) { ?>
             <div class="col-xs-12 col-lg-6">
-                    <div class="col-xs-2 col-lg-2 book-preview-side" align="left">
-                        <img src="<?php echo base_url('assets/thumbnails/') . $row->image; ?>"
-                             style="width:100%; " onclick="myFunction(this);">
-                    </div>
+                <div class="col-xs-2 col-lg-2 book-preview-side" align="left">
+                    <img src="<?php echo base_url('assets/thumbnails/') . $row->image; ?>"
+                         style="width:100%; " onclick="myFunction(this);">
+                </div>
 
-                    <div class="col-xs-8 col-lg-7 book-preview-main">
-                        <img id="expandedImg" style="width:100%"
-                             src="<?php echo base_url('assets/thumbnails/') . $row->image; ?>">
+                <div class="col-xs-8 col-lg-7 book-preview-main">
+                    <img id="expandedImg" style="width:100%"
+                         src="<?php echo base_url('assets/thumbnails/') . $row->image; ?>">
 
-                        <div id="imgtext"></div>
-                    </div>
+                    <div id="imgtext"></div>
+                </div>
 
-                    <div class="col-xs-2 col-lg-2 book-preview-side" align="right">
-                        <img src="<?php echo base_url('assets/thumbnails/') . $row->backimg; ?>"
-                             style="width:100%;" onclick="myFunction(this);">
-                    </div>
+                <div class="col-xs-2 col-lg-2 book-preview-side" align="right">
+                    <img src="<?php echo base_url('assets/thumbnails/') . $row->backimg; ?>"
+                         style="width:100%;" onclick="myFunction(this);">
+                </div>
             </div>
             <div class="col-xs-12 col-lg-6 book-detail">
                 <p><?php echo $row->title; ?></p>
