@@ -9,7 +9,7 @@
     </div>
 
     <?php if ($this->session->flashdata('success')) { ?>
-        <div class="col-md-12 success-bar">
+        <div class="col-xs-12 success-bar">
             <i class="las la-check-square"></i>
             <?php echo $this->session->flashdata('success') ?>
         </div>

@@ -83,8 +83,8 @@
                 Update
             </button>
         </form>
-        <p class="account-detail-label">
-            Change Password
+        <p class="form-info">
+            <a href="<?php echo site_url('user/changepassword')?>">Change Password</a>
         </p>
     </div>
 <?php $this->view('layouts/user_footer') ?>

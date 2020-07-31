@@ -76,4 +76,16 @@ class Account extends CI_Model
         $this->db->where('id', $userId);
         return $this->db->update('users',$user);
     }
+
+    public function updatePassword($user, $userId)
+    {
+        $this->db->where('id', $userId);
+        return $this->db->update('users', $user);
+    }
+
+    public function confirmCurrentPassword($userId, $password)
+    {
+        $user = $this->db->get_where('users', array('id' => $userId))->first_row();
+        return password_verify($password, $user->password);
+    }
 }
