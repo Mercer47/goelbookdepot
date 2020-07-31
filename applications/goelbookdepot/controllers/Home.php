@@ -68,21 +68,16 @@ class Home extends CI_Controller
             }
             else
             {
-                $tag=1;
                 foreach ($_SESSION['cart'] as $key => $value) {
                     //if a book is already added
-                    if ($value==$id) {
-                        $tag=1;
-                    }
-                    else
-                    {
-                        $tag=0;
+                    if ($value == $id) {
+                        break;
+                    } else {
+                        // if a book is not yet added
+                        $_SESSION['cart'][]=$id;
                     }
                 }
-                // if a book is not yet added
-                if ($tag!=1) {
-                    $_SESSION['cart'][]=$id;
-                }
+
             }
         }
 
@@ -91,6 +86,7 @@ class Home extends CI_Controller
             $delid=$_POST['delid'];
             foreach ($_SESSION['cart'] as $key => $value) {
                 if ($value==$delid) {
+                    $this->session->set_flashdata('success','Item removed');
                     unset($_SESSION['cart'][$key]);
                     unset($_SESSION['cost'][$delid]);
                     if (isset($_SESSION['final_cart'])) {
