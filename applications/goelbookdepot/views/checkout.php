@@ -133,11 +133,11 @@
             }).then(function(result) {
                 if (result.error) {
                     // Show error to your customer (e.g., insufficient funds)
-                    window.location.href = '<?php echo site_url('order/status/0/') ?>' + result.error.message;
+                    window.location.href = '<?php echo site_url('order/status/0?message=') ?>' + result.error.message;
                 } else {
                     // The payment has been processed!
                     if (result.paymentIntent.status === 'succeeded') {
-                        window.location.href = '<?php echo site_url('order/status/1/') ?>' + 'Payment Successful';
+                        window.location.href = '<?php echo site_url('order/status/1?message=') ?>' + 'Payment Successful';
                         // Show a success message to your customer
                         // There's a risk of the customer closing the window before callback
                         // execution. Set up a webhook or plugin to listen for the

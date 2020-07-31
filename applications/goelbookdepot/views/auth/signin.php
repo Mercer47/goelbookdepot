@@ -1,6 +1,13 @@
 <?php $this->view('layouts/header') ?>
     <div class="col-md-12 form-container">
         <form method="POST" action="<?php echo site_url('auth/signin') ?>">
+            <?php if ($this->session->flashdata('success')) { ?>
+                <div class="col-md-12 success-bar">
+                    <i class="las la-check-square"></i>
+                    <?php echo $this->session->flashdata('success') ?>
+                </div>
+            <?php } ?>
+
             <p class="form-heading">
                 EMAIL
             </p>
@@ -42,6 +49,13 @@
             <button class="btn-sign-in">
                 Sign In
             </button>
+
+            <p class="form-info">
+                Forgot Your Password?
+                <a href="<?php echo site_url('auth/reset') ?>">
+                    Reset here
+                </a>
+            </p>
 
             <p class="form-info">
                 No Account? Create account

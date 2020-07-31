@@ -383,6 +383,14 @@ ul#nav li{
 	margin-top: 10px;
 }
 
+.success-bar
+{
+	font-family: Questrial-regular, serif;
+	text-align: center;
+	color: #2995bf;
+	font-size: 16px;
+}
+
 
 @media screen and (min-width: 700px) {
 	.site-heading{

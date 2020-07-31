@@ -26,7 +26,8 @@
         }
     </style>
     <style type="text/css">
-        .loader-wrapper {
+
+        .loader-wrapper{
             width: 100%;
             height: 100%;
             position: absolute;
@@ -34,12 +35,11 @@
             left: 0;
             background-color: #f95555;
         }
-
         .loader {
             display: inline-block;
             width: 30px;
             height: 30px;
-            position: relative;
+            position: fixed;
             border: 4px solid #Fff;
             top: 50%;
             left: 50%;
@@ -98,7 +98,6 @@
             }
         }
     </style>
-
 </head>
 <body>
     <div class="col-xs-12 nav-page">
