@@ -37,4 +37,15 @@ class AuthModel extends CI_Model
         return false;
     }
 
+    public function checkIfAccountExists($email)
+    {
+        return $this->db->get_where('users', array('email' => $email))->first_row();
+    }
+
+    public function updatePassword($user, $email)
+    {
+        $this->db->where('email', $email);
+        return $this->db->update('users', $user);
+    }
+
 }
