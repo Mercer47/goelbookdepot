@@ -1,6 +1,6 @@
 <?php $this->view('layouts/user_header') ?>
     <div class="col-md-10">
-        <form method="POST" action="<?php echo site_url('user/updatepassword') ?>">
+        <?php echo form_open(site_url('user/updatepassword'), array('method' => 'POST')) ?>
             <?php if ($this->session->flashdata('error')) { ?>
                 <div class="col-md-12 error-bar">
                     <i class="las la-exclamation-triangle"></i>

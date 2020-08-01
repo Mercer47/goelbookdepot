@@ -1,6 +1,6 @@
 <?php $this->view('layouts/header'); ?>
 <div class="col-md-10">
-    <form method="POST" action="<?php echo site_url('auth/updatepassword') ?>">
+    <?php echo form_open(site_url('auth/updatepassword'), array('method' => 'POST')) ?>
         <p class="form-heading">
             New Password
         </p>

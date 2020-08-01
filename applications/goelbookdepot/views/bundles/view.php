@@ -23,7 +23,7 @@
     <div class="col-xs-12 gift-box">
         <?php echo "Only for ₹".$bundle->effective_price." (".$bundle->discount."% off)" ?>
         <?php if ($bundleAsBook->availability) {?>
-            <form method="POST" action="<?php echo site_url('home/cart') ?>">
+            <?php echo form_open(site_url('home/cart'), array('method' => 'POST')) ?>
                 <input type="hidden" name="id" value="<?php echo $bundleAsBook->id; ?>">
                 <button class="btn-add-cart"><i class="las la-cart-plus"></i> Add to Cart </button>
             </form>

@@ -1,6 +1,6 @@
 <?php $this->view('layouts/header') ?>
     <div class="col-md-12 form-container">
-        <form method="POST" action="<?php echo site_url('auth/signin') ?>">
+        <?php echo form_open(site_url('auth/signin'), array('method' => 'POST')) ?>
             <?php if ($this->session->flashdata('success')) { ?>
                 <div class="col-md-12 success-bar">
                     <i class="las la-check-square"></i>

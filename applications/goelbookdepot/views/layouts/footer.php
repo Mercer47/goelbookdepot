@@ -43,7 +43,7 @@
         $.ajax({
             url:"<?php echo site_url('home/search') ?>",
             method:"POST",
-            data:{query:query},
+            data:{query:query, '<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>' },
             success:function(data)
             {
                 $('#result').html(data);

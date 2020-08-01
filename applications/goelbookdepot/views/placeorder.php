@@ -1,7 +1,7 @@
 <?php $this->view('layouts/inner_page_header') ?>
 
 <div class="col-xs-12 form-container">
-    <form action="<?php echo site_url('home/payment'); ?>" method="POST">
+    <?php echo form_open(site_url('home/payment'), array('method' => 'POST')) ?>
         <br><br>
         <input
                 type="text"

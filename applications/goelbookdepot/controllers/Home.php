@@ -11,6 +11,7 @@ class Home extends CI_Controller
 		parent::__construct();
         $this->load->library('session');
 		$this->load->helper('url');
+		$this->load->helper('form');
 		$this->load->model('Store');
         date_default_timezone_set("Asia/Kolkata");
 	}

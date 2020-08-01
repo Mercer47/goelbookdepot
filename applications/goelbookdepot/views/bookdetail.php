@@ -30,7 +30,7 @@
                 <p style="color: #00CC00">You Save: ₹<?php echo intval($row->MRP - $price); ?></p>
                 <div class="col-xs-12 col-lg-6 ">
                     <?php if ($row->availability) {  ?>
-                        <form action="<?php echo site_url('home/cart'); ?>" method="POST">
+                        <?php echo form_open(site_url('home/cart'), array('method' => 'POST')) ?>
                             <input type="hidden" name="id" value="<?php echo $row->id; ?>">
                             <input type="hidden" name="price" value="<?php echo intval($price + $row->charges); ?>">
                             <button class="btn-add-cart"><i class="las la-cart-plus"></i> Add to Cart </button>

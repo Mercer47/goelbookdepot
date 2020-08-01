@@ -1,6 +1,6 @@
 <?php $this->view('layouts/user_header') ?>
     <div class="col-xs-12">
-        <form method="POST" action="<?php echo site_url('user/update') ?>">
+        <?php echo form_open(site_url('user/update'), array('method' => 'POST')) ?>
             <p class="account-details-heading">
                 Personal Information
             </p>

@@ -14,7 +14,7 @@
             </div>
         <?php } ?>
 
-        <form method="POST" action="<?php echo site_url('auth/sendresetlink') ?>">
+        <?php echo form_open(site_url('auth/sendresetlink'), array('method' => 'POST')) ?>
             <p class="form-heading">
                 EMAIL
             </p>

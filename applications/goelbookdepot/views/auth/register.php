@@ -1,7 +1,7 @@
 <?php $this->view('layouts/header'); ?>
 
 <div class="col-md-12 form-container">
-    <form method="POST" action="<?php echo site_url('auth/signup') ?>">
+    <?php echo form_open(site_url('auth/signup'), array('method' => 'POST')) ?>
         <p class="form-heading">
             NAME
         </p>
