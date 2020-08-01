@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 //$config['base_url'] = 'http://192.168.43.172/goelbookdepot-develop';
-$config['base_url'] = 'http://goelbookdepot.macmer.in';
+$config['base_url'] = 'http://macmer.in/gbd-test';
 /*
 |--------------------------------------------------------------------------
 | Index File

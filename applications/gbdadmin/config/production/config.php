@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://admin.goelbookdepot.macmer.in/';
+$config['base_url'] = 'http://macmer.in/gbd-test/admin.php';
 /*
 |--------------------------------------------------------------------------
 | Index File
