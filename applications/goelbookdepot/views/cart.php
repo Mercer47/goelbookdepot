@@ -45,7 +45,7 @@
                                 <?php } ?>
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                                <form action="<?php echo site_url('home/cart') ?>" method="POST">
+                            <?php echo form_open(site_url('home/cart'), array('method' => 'POST')) ?>
                                     <input type="hidden" name="delid" value="<?php echo $row->id; ?>">
                                     <button class="btn-remove-item"> REMOVE THIS BOOK</button>
                                 </form>
