@@ -238,8 +238,9 @@ class Home extends CI_Controller
             $data['amount'] = $_SESSION['amount'];
             $this->load->view('placeorder', $data);
         } else {
+            $this->config->load('credentials');
             $amount = $_SESSION['amount']."00";
-            \Stripe\Stripe::setApiKey('sk_test_51H3hLRE7tUzyZRD9bnguSMUNiPQ8rbEJy3OTdgem4Hs892xkH3N1IfTzqCWyLfpVIbluIgrSSnhb7840obP0uEyy003JnvFmLD');
+            \Stripe\Stripe::setApiKey($this->config->item('STRIPE_DEV_API_KEY'));
             $intent = \Stripe\PaymentIntent::create([
                 'amount' => intval($amount),
                 'currency' => 'inr',
@@ -260,7 +261,7 @@ class Home extends CI_Controller
                 'Items' => json_encode($_SESSION['final_cart']),
                 'Total' => $_SESSION['amount'],
                 'intent_id' => $intent->id,
-                'Status' => $intent->status,
+                'Status' => 'Verifying Payment',
                 'shipping_status' => 'Order Received',
                 'Timestamp' => date("Y-m-d H:i:s")
             );

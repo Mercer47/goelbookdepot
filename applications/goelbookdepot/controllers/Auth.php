@@ -138,6 +138,7 @@ class Auth extends CI_Controller
 
     public function sendMail($emailId)
     {
+        $this->config->load('credentials');
         $token = random_string('alnum', 32);
         $this->session->set_tempdata('token', $token, 300);
         $link = '<a href="'.site_url('auth/createnewpassword/').$token.'?email='.$emailId.'">'.site_url('auth/createnewpassword/').$token.'?email='.$emailId.'</a>';
@@ -152,7 +153,7 @@ class Auth extends CI_Controller
             $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
             $mail->Username   = 'raghavkumakshay@gmail.com';                     // SMTP username
-            $mail->Password   = 'cozjfgsrazukqjls';                               // SMTP password
+            $mail->Password   = $this->config->item('GMAIL_SECRET');                               // SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
             $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 

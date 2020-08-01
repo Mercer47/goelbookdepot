@@ -5,21 +5,22 @@ use PHPMailer\PHPMailer\Exception;
 
 class WebHook extends CI_Controller
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->load->model('WebHookModel');
+        $this->config->load('credentials');
     }
 
     public function index(){
         // Set your secret key. Remember to switch to your live secret key in production!
         // See your keys here: https://dashboard.stripe.com/account/apikeys
-        \Stripe\Stripe::setApiKey('sk_test_51H3hLRE7tUzyZRD9bnguSMUNiPQ8rbEJy3OTdgem4Hs892xkH3N1IfTzqCWyLfpVIbluIgrSSnhb7840obP0uEyy003JnvFmLD');
+        \Stripe\Stripe::setApiKey($this->config->item('STRIPE_DEV_API_KEY'));
 
         // If you are testing your webhook locally with the Stripe CLI you
         // can find the endpoint's secret by running `stripe listen`
         // Otherwise, find your endpoint's secret in your webhook settings in the Developer Dashboard
-        $endpoint_secret = 'whsec_Ak3JwsqjVZqiLBxrUegUjccUHO6fTLVy';
+        $endpoint_secret = $this->config->item('STRIPE_CLI_ENDPOINT_SECRET');
 
         $payload = @file_get_contents('php://input');
         $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
@@ -56,7 +57,7 @@ class WebHook extends CI_Controller
                 $order = $this->WebHookModel->handlePaymentIntentSucceeded($paymentIntent);
                 if ($order) {
                     $subject = 'Order Confirmed';
-                    $message = 'Dear '.$order->Name.', <br/> Thanks for buying books from Goel Book Depot. 
+                    $message = 'Dear '.$order->Name.', <br/> Thanks for buying books from Goel Book Depot.
                                 <br/>You will be notified when your Order will be shipped.
                                 <br/>You can also check your order Status in "My Orders" section after Signing in to Goel Book Depot App
                                 <br/>Have a Nice Day
@@ -83,7 +84,7 @@ class WebHook extends CI_Controller
                 $order = $this->WebHookModel->handlePaymentIntentFailed($paymentIntent);
                 if ($order) {
                     $subject = 'Order Failed';
-                    $message = 'Dear '.$order->Name.', <br/> Thank You for placing an order on Goel Book Depot . 
+                    $message = 'Dear '.$order->Name.', <br/> Thank You for placing an order on Goel Book Depot .
                                 <br/>You recently placed an order but the order was failed.
                                 <br/>It may be due to problems in your bank server. Please try to place order again after sometime.
                                 <br/>Have a Nice Day.
@@ -121,7 +122,7 @@ class WebHook extends CI_Controller
             $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
             $mail->Username   = 'raghavkumakshay@gmail.com';                     // SMTP username
-            $mail->Password   = 'cozjfgsrazukqjls';                               // SMTP password
+            $mail->Password   = $this->config->item('GMAIL_SECRET');                               // SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
             $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
