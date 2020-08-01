@@ -1,6 +1,6 @@
 <?php $this->view('header'); ?>
 <div class="col-md-9">
-    <form method="POST" action="<?php echo site_url('home/createnewcategory'); ?>">
+    <?php echo form_open(site_url('home/createnewcategory'), array('method' => 'POST')) ?>
         <p>Category Name</p>
         <input type="text" name="category" required >
         <p>Subcategory Name</p>

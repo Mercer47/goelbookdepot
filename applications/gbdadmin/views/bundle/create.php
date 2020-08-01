@@ -2,7 +2,7 @@
 
 <div class="col-md-10">
     <div class="col-md-12 add-book-wrapper" style="padding: 30px;">
-        <form method="POST" action="<?php echo site_url('home/insertBundle') ?>" enctype="multipart/form-data">
+        <?php echo form_open_multipart(site_url('home/insertBundle'), array('method' => 'POST')) ?>
             <div class="col-md-6" align="left">
                     <p class="book-form-heading">Name</p>
                     <input type="text" name="name" class="book-form-input" required>

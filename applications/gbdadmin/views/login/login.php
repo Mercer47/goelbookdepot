@@ -27,6 +27,7 @@
 
 		</div>
 		<div class="col-md-4">
+            <?php echo form_open(site_url('login/login'), array('method' => 'POST')) ?>
 			<form method="POST" action="<?php echo site_url('login/login') ?>">
 				<input type="text" name="username" placeholder="Username" class="form-input" required>
 				<br>

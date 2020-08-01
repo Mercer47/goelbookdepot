@@ -7,8 +7,7 @@
             width: 80%;
         }
     </style>
-    <form method="POST" action="<?php echo site_url('home/insertbook'); ?>" enctype="multipart/form-data">
-
+    <?php echo form_open_multipart(site_url('home/insertbook'), array('method' => 'POST')) ?>
         <div class="col-md-12 add-book-wrapper" style="padding: 30px;">
             <div class="col-md-4" align="left">
                 <p class="book-form-heading">Category</p>

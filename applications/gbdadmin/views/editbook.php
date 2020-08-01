@@ -7,8 +7,7 @@
             width: 80%;
         }
     </style>
-    <form method="POST" action="<?php echo site_url('home/updatebook'); ?>" enctype="multipart/form-data">
-
+    <?php echo form_open_multipart(site_url('home/updatebook'), array('method' => 'POST')) ?>
         <div class="col-md-12" style="padding: 30px;">
             <?php foreach ($book
 

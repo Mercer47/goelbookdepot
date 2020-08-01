@@ -12,7 +12,7 @@
 
             <?php } ?>
         <div class="col-md-12 new-cat-form">
-            <form method="POST" action="<?php echo site_url('home/newcategory') ?>">
+            <?php echo form_open(site_url('home/newcategory'), array('method' => 'POST')) ?>
                 <p>Add New Category</p>
                 <input type="text" required name="category">
                 <br><br>

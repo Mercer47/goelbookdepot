@@ -10,7 +10,7 @@
     <?php } ?>
 
     <div class="col-md-12 new-cat-form">
-        <form method="POST" action="<?php echo site_url('home/newSubject') ?>">
+        <?php echo form_open(site_url('home/newSubject'), array('method' => 'POST')) ?>
             <p>Add New Subject</p>
             <input type="text" name="subject" required >
             <input type="hidden" value="<?php echo $class; ?>" name="class">

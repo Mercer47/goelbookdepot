@@ -10,7 +10,7 @@
         </div>
     <?php } ?>
     <div class="col-md-12 new-cat-form">
-        <form method="POST" action="<?php echo site_url('home/newclass') ?>">
+        <?php echo form_open(site_url('home/newclass'), array('method' => 'POST')) ?>
             <p>Add New Class</p>
             <input type="text" name="class" required >
             <input type="hidden" value="<?php echo $category; ?>" name="category">

@@ -23,7 +23,7 @@ foreach($data as $row)
 <p>Address: <?php echo $row->Address;  ?></p>
 <p>Email: <?php echo $row->Email;  ?></p>
 <p>Date/Time: <?php echo date('d-M Y H:i A ',strtotime($row->Timestamp)); ?></p>
-    <form method="POST" action="<?php echo site_url('home/changeShippingStatus') ?>">
+    <?php echo form_open(site_url('home/changeShippingStatus'), array('method' => 'POST')) ?>
         <p>Shipping Status</p>
         <input type="hidden" name="order_id" value="<?php echo $row->OrderId; ?>"  />
         <select name="shipping_status">
