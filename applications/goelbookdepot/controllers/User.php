@@ -9,6 +9,7 @@ class User extends CI_Controller
         $this->load->helper('url');
         $this->load->library('session');
         $this->load->model('Account');
+        $this->config->load('validation_rules');
 
         if (!isset($_SESSION['user_id'])) {
             redirect(site_url('home/signin'));
@@ -38,7 +39,7 @@ class User extends CI_Controller
         $data['details'] = $this->Account->details($this->userId);
 
         $this->load->library('form_validation');
-        $this->form_validation->set_rules($this->getValidationRules('update-details'));
+        $this->form_validation->set_rules($this->config->item('update-details'));
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('user/account',$data);
@@ -72,7 +73,7 @@ class User extends CI_Controller
     public function updatePassword()
     {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules($this->getValidationRules('update-password'));
+        $this->form_validation->set_rules($this->config->item('change-password'));
 
         if ($this->form_validation->run() === FALSE) {
             $data['userName'] = $this->Account->userName($this->userId);
@@ -108,66 +109,5 @@ class User extends CI_Controller
         unset($_SESSION);
         session_destroy();
         redirect('home/signin');
-    }
-
-    public function getValidationRules($page)
-    {
-        if (strcmp($page, 'update-details') == 0) {
-            return [
-                [
-                    'field' => 'phone',
-                    'rules' => 'required|exact_length[10]|numeric',
-                    'errors' => [
-                        'required' => 'You must enter a Phone number',
-                        'exact_length' => 'Must be a 10 digit number',
-                        'numeric' => 'Invalid Phone Number'
-                    ]
-                ],
-                [
-                    'field' => 'address',
-                    'rules' => 'required|min_length[15]',
-                    'errors' => [
-                        'required' => 'You must enter your address',
-                        'min_length' => 'Invalid Address. Please enter your Full Address'
-                    ],
-                ],
-                [
-                    'field' => 'name',
-                    'rules' => 'required',
-                    'errors' => [
-                        'required' => 'You must enter your name'
-                    ]
-                ]
-            ];
-        } elseif (strcmp($page, 'update-password') == 0) {
-            return [
-                [
-                    'field' => 'current',
-                    'rules' => 'required|min_length[8]',
-                    'errors' => [
-                        'required' => 'You must enter your current Password',
-                        'min_length' => 'Password must be grater than 8 characters'
-                    ]
-                ],
-                [
-                    'field' => 'new',
-                    'rules' => 'required|min_length[8]|differs[current]',
-                    'errors' => [
-                        'required' => 'You must enter a new Password',
-                        'min_length' => 'Password must be grater than 8 characters',
-                        'differs' => 'Current and New password cannot be same'
-                    ]
-                ],
-                [
-                    'field' =>  'confirm',
-                    'rules' => 'required|matches[new]',
-                    'errors' => [
-                        'required' => 'You must confirm your password',
-                        'matches' => 'Passwords does not match'
-                    ]
-                ],
-            ];
-        }
-       return [];
     }
 }

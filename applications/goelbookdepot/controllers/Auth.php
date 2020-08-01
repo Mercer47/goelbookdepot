@@ -13,12 +13,13 @@ class Auth extends CI_Controller
         $this->load->library('session');
         $this->load->library('form_validation');
         $this->load->helper('url');
+        $this->config->load('validation_rules');
         date_default_timezone_set('Asia/Kolkata');
     }
 
     public function signUp()
     {
-        $this->form_validation->set_rules($this->getValidationRules('register'));
+        $this->form_validation->set_rules($this->config->item('register'));
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('auth/register');
         } else {
@@ -45,7 +46,7 @@ class Auth extends CI_Controller
 
     public function signIn()
     {
-        $this->form_validation->set_rules($this->getValidationRules('sign-in'));
+        $this->form_validation->set_rules($this->config->item('sign-in'));
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('auth/signin');
@@ -104,7 +105,7 @@ class Auth extends CI_Controller
 
     public function updatePassword()
     {
-        $this->form_validation->set_rules($this->getValidationRules('update-password'));
+        $this->form_validation->set_rules($this->config->item('update-password'));
 
         if ($this->form_validation->run() == FALSE) {
             $data['email'] = $this->input->post('email');
@@ -180,100 +181,5 @@ class Auth extends CI_Controller
             $this->session->set_flashdata('error', 'Could not send link. Something went wrong');
             redirect(site_url('auth/reset'));
         }
-    }
-
-    public function getValidationRules($page)
-    {
-        if (strcmp($page,'sign-in') == 0) {
-            return [
-                [
-                    'field' => 'email',
-                    'rules' => 'required|valid_email',
-                    'errors' => [
-                        'required' => 'Email is required',
-                        'valid_email' => 'Must be a Valid email'
-                        ]
-                ],
-                [
-                    'field' => 'password',
-                    'rules' => 'required|min_length[8]',
-                    'errors' => [
-                        'required' => 'You must enter a Password',
-                        'min_length' => 'Password must be grater than 8 characters'
-                    ]
-                ],
-            ];
-        } elseif (strcmp($page, 'register') == 0) {
-            return [
-                [
-                    'field' => 'email',
-                    'rules' => 'required|valid_email',
-                    'errors' => [
-                        'required' => 'Email is required',
-                        'valid_email' => 'Must be a Valid email'
-                    ]
-                ],
-                [
-                    'field' => 'password',
-                    'rules' => 'required|min_length[8]',
-                    'errors' => [
-                        'required' => 'You must enter a Password',
-                        'min_length' => 'Password must be grater than 8 characters'
-                    ]
-                ],
-                [
-                    'field' =>  'confirm',
-                    'rules' => 'required|matches[password]',
-                    'errors' => [
-                        'required' => 'You must confirm your password',
-                        'matches' => 'Passwords does not match'
-                    ]
-                ],
-                [
-                    'field' => 'phone',
-                    'rules' => 'required|exact_length[10]|numeric',
-                    'errors' => [
-                        'required' => 'You must enter a Phone number',
-                        'exact_length' => 'Must be a 10 digit number',
-                        'numeric' => 'Invalid Phone Number'
-                    ]
-                ],
-                [
-                    'field' => 'address',
-                    'rules' => 'required|min_length[15]',
-                    'errors' => [
-                        'required' => 'You must enter your address',
-                        'min_length' => 'Invalid Address. Please enter your Full Address'
-                    ],
-                ],
-                [
-                    'field' => 'name',
-                    'rules' => 'required',
-                    'errors' => [
-                        'required' => 'You must enter your name'
-                    ]
-                ]
-            ];
-        } elseif (strcmp($page, 'update-password') == 0) {
-            return [
-            [
-                'field' => 'password',
-                'rules' => 'required|min_length[8]',
-                'errors' => [
-                    'required' => 'You must enter a Password',
-                    'min_length' => 'Password must be grater than 8 characters'
-                ]
-            ],
-                [
-                    'field' =>  'confirm',
-                    'rules' => 'required|matches[password]',
-                    'errors' => [
-                        'required' => 'You must confirm your password',
-                        'matches' => 'Passwords does not match'
-                    ]
-                ],
-            ];
-        }
-        return [];
     }
 }

@@ -20,7 +20,7 @@
             />
 
             <?php if (form_error('email')) { ?>
-                <?php echo form_error('email','<div class="error-bar"><i class="las la-exclamation-triangle"></i> ','</div>') ?>
+                <?php echo form_error('email','<div class="invalid-bar"><i class="las la-exclamation-triangle"></i> ','</div>') ?>
             <?php } ?>
 
             <p class="form-heading">
@@ -35,7 +35,7 @@
             />
 
             <?php if (form_error('password')) { ?>
-                <?php echo form_error('password','<div class="error-bar"><i class="las la-exclamation-triangle"></i> ','</div>') ?>
+                <?php echo form_error('password','<div class="invalid-bar"><i class="las la-exclamation-triangle"></i> ','</div>') ?>
             <?php } ?>
 
             <br>

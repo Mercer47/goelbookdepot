@@ -17,7 +17,7 @@
             />
             <?php if (form_error('current')) { ?>
                 <?php echo form_error('current',
-                    '<div class="error-bar"><i class="las la-exclamation-triangle"></i> ',
+                    '<div class="invalid-bar"><i class="las la-exclamation-triangle"></i> ',
                     '</div>')
                 ?>
             <?php } ?>
@@ -32,7 +32,7 @@
             />
             <?php if (form_error('new')) { ?>
                 <?php echo form_error('new',
-                    '<div class="error-bar"><i class="las la-exclamation-triangle"></i> ',
+                    '<div class="invalid-bar"><i class="las la-exclamation-triangle"></i> ',
                     '</div>')
                 ?>
             <?php } ?>
@@ -47,7 +47,7 @@
             />
             <?php if (form_error('confirm')) { ?>
                 <?php echo form_error('confirm',
-                    '<div class="error-bar"><i class="las la-exclamation-triangle"></i> ',
+                    '<div class="invalid-bar"><i class="las la-exclamation-triangle"></i> ',
                     '</div>')
                 ?>
             <?php } ?>

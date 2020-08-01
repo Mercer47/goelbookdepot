@@ -207,6 +207,7 @@ class Home extends CI_Controller
 
 	public function placeorder()
 	{
+        $this->load->library('form_validation');
 	    $this->load->model('Account');
 	    $data['title'] = "Enter Your Details";
         if (!isset($_SESSION['cart'])) {
@@ -224,36 +225,49 @@ class Home extends CI_Controller
 	}
 
 	public function payment(){
-	    $amount = $_SESSION['amount']."00";
-        \Stripe\Stripe::setApiKey('sk_test_51H3hLRE7tUzyZRD9bnguSMUNiPQ8rbEJy3OTdgem4Hs892xkH3N1IfTzqCWyLfpVIbluIgrSSnhb7840obP0uEyy003JnvFmLD');
-        $intent = \Stripe\PaymentIntent::create([
-            'amount' => intval($amount),
-            'currency' => 'inr',
-            'payment_method_types' => ['card'],
-            'receipt_email' => 'macmershimla@gmail.com',
-        ]);
-        $data['intent'] = $intent;
-        if (!isset($_SESSION['cart'])) {
-            redirect(site_url('home'));
-        }
+	    $this->load->library('form_validation');
+        $this->config->load('validation_rules');
+	    $this->form_validation->set_rules($this->config->item('placeOrder'));
+        $this->load->model('Account');
 
-        $details = array(
-            'user_id' => $_SESSION['user_id'],
-            'Name' => $this->input->post('name'),
-            'Contact' => $this->input->post('contact'),
-            'Email' => $this->input->post('email'),
-            'Address' => $this->input->post('address'),
-            'Items' => json_encode($_SESSION['final_cart']),
-            'Total' => $_SESSION['amount'],
-            'intent_id' => $intent->id,
-            'Status' => $intent->status,
-            'shipping_status' => 'Order Received',
-            'Timestamp' => date("Y-m-d H:i:s")
-        );
-        $_SESSION['order_id'] = $intent->id;
-        $data['customerName'] = $details['Name'];
-        $this->Store->addOrder($details);
-        $this->load->view('checkout',$data);
+        if ($this->form_validation->run() == FALSE) {
+            $data['title'] = "Enter Your Details";
+            $userId = $_SESSION['user_id'];
+            $data['user'] = $this->Account->details($userId);
+            $data['amount'] = $_SESSION['amount'];
+            $this->load->view('placeorder', $data);
+        } else {
+            $amount = $_SESSION['amount']."00";
+            \Stripe\Stripe::setApiKey('sk_test_51H3hLRE7tUzyZRD9bnguSMUNiPQ8rbEJy3OTdgem4Hs892xkH3N1IfTzqCWyLfpVIbluIgrSSnhb7840obP0uEyy003JnvFmLD');
+            $intent = \Stripe\PaymentIntent::create([
+                'amount' => intval($amount),
+                'currency' => 'inr',
+                'payment_method_types' => ['card'],
+                'receipt_email' => 'macmershimla@gmail.com',
+            ]);
+            $data['intent'] = $intent;
+            if (!isset($_SESSION['cart'])) {
+                redirect(site_url('home'));
+            }
+
+            $details = array(
+                'user_id' => $_SESSION['user_id'],
+                'Name' => $this->input->post('name'),
+                'Contact' => $this->input->post('contact'),
+                'Email' => $this->input->post('email'),
+                'Address' => $this->input->post('address'),
+                'Items' => json_encode($_SESSION['final_cart']),
+                'Total' => $_SESSION['amount'],
+                'intent_id' => $intent->id,
+                'Status' => $intent->status,
+                'shipping_status' => 'Order Received',
+                'Timestamp' => date("Y-m-d H:i:s")
+            );
+            $_SESSION['order_id'] = $intent->id;
+            $data['customerName'] = $details['Name'];
+            $this->Store->addOrder($details);
+            $this->load->view('checkout',$data);
+        }
     }
 
 	public function thanks()

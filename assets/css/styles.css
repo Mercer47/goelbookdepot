@@ -386,6 +386,16 @@ ul#nav li{
 	width: 100%;
 }
 
+.invalid-bar
+{
+	font-family: Questrial-regular, serif;
+	text-align: center;
+	color: #f95555;
+	font-size: 16px;
+	margin-top: 10px;
+	width: 100%;
+}
+
 .success-bar
 {
 	font-family: Questrial-regular, serif;
