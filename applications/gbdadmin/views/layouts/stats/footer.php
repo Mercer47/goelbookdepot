@@ -11,8 +11,7 @@
         $.ajax({
             url: '<?php echo site_url('stats/getData') ?>',
             type: 'POST',
-            data: { 'startDate=' + picker.startDate.format('YYYY-MM-DD') + '&endDate=' + picker.endDate.format('YYYY-MM-DD'),
-                '<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>'},
+            data: 'startDate=' + picker.startDate.format('YYYY-MM-DD') + '&endDate=' + picker.endDate.format('YYYY-MM-DD'),
             success: function (res) {
                 var data = JSON.parse(res);
                 var salesData = [];

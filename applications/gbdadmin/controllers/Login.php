@@ -8,6 +8,7 @@ class Login extends CI_Controller
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->model('credentials');
+        $this->load->helper('form');
 		session_start();
 		if(isset($_SESSION['id'])){
 		    redirect(site_url('home'));

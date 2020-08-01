@@ -11,6 +11,7 @@ class Home extends CI_Controller
         parent::__construct();
         $this->load->helper('url');
         $this->load->model('Store');
+        $this->load->helper('form');
         session_start();
         if (!isset($_SESSION['id'])) {
             redirect(site_url('login'));
