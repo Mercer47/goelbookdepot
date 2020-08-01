@@ -2,4 +2,6 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/oxekim7dpn5n/public_html/gbd-test/applications/gbdadmin/config
-    - /bin/cp -R applications/gbdadmin/config/production $DEPLOYPATH
+    - /bin/cp -R applications/gbdadmin/config/development $DEPLOYPATH
+    - export DEPLOYPATH=/home/oxekim7dpn5n/public_html/gbd-test/applications/goelbookdepot/config
+    - /bin/cp -R applications/goelbookdepot/config/production $DEPLOYPATH
