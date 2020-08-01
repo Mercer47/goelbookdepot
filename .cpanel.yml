@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/oxekim7dpn5n/public_html/gbd-test
+    - export DEPLOYPATH=/home/oxekim7dpn5n/public_html/gbd-test/applications/gbdadmin
     - /bin/cp -R applications/gbdadmin/views $DEPLOYPATH
