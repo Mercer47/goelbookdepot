@@ -74,7 +74,7 @@ class Auth extends CI_Controller
             $user = $this->AuthModel->attemptLogin($credentials);
 
             if ($user) {
-                if (!$user->confirm_user) {
+                if (!$user->confirmed_user) {
                     $this->session->set_flashdata('error', 'Please verify your account before signin in');
                     redirect('home/signin');
                 }
