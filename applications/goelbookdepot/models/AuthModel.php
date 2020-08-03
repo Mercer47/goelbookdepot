@@ -56,7 +56,7 @@ class AuthModel extends CI_Model
     public function confirmUser($token, $email)
     {
         $this->db->where('email', $email);
-        $this->db->where('confirm_user', false);
+        $this->db->where('confirmed_user', false);
         $this->db->where('confirm_user_token', $token);
         $user = $this->db->get('users')->first_row();
 

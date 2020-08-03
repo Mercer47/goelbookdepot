@@ -236,10 +236,13 @@ class Auth extends CI_Controller
                               '.$link.' 
                             <br/> With Regards <br/> Goel Book Depot Shimla';
 
-            $mail->send();
-
-            $this->session->set_flashdata('success', 'Account Created. Verification Email is sent to your email Id');
-            redirect(site_url('home/signin'));
+            if ($mail->send()) {
+                $this->session->set_flashdata('success', 'Account Created. Verification Email is sent to your email Id');
+                redirect(site_url('home/signin'));
+            } else {
+                $this->session->set_flashdata('error', 'Could not send Email to your provided Email Id.');
+                redirect(site_url('home/signin'));
+            }
         } catch (Exception $e) {
             $this->session->set_flashdata('error', 'Could not send Email to your provided Email Id.');
             redirect(site_url('home/signin'));
