@@ -1,4 +1,19 @@
 <?php $this->view('layouts/user_header') ?>
+    <div class="col-xs-12">
+        <?php if ($this->session->flashdata('error')) { ?>
+            <div class="col-md-12 error-bar">
+                <i class="las la-exclamation-triangle"></i>
+                <?php echo $this->session->flashdata('error') ?>
+            </div>
+        <?php } ?>
+        <?php if ($this->session->flashdata('success')) { ?>
+            <div class="col-md-12 success-bar">
+                <i class="las la-check-square"></i>
+                <?php echo $this->session->flashdata('success') ?>
+            </div>
+        <?php } ?>
+    </div>
+
     <?php if (!empty($orders)) { ?>
         <div class="col-xs-12">
             <p class="account-details-heading">Your Orders</p>

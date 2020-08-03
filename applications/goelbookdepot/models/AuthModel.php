@@ -20,8 +20,13 @@ class AuthModel extends CI_Model
         }
 
         $userData['password'] = password_hash($userData['password'],PASSWORD_BCRYPT);
-        $user = $this->db->insert('users',$userData);
-        return $user;
+        if ($this->db->insert('users',$userData)) {
+            $this->db->where('id', $this->db->insert_id());
+            $user = $this->db->get('users')->first_row();
+            return $user;
+        } else {
+            return false;
+        }
     }
 
     public function attemptLogin($credentials)
@@ -46,6 +51,22 @@ class AuthModel extends CI_Model
     {
         $this->db->where('email', $email);
         return $this->db->update('users', $user);
+    }
+
+    public function confirmUser($token, $email)
+    {
+        $this->db->where('email', $email);
+        $this->db->where('confirm_user', false);
+        $this->db->where('confirm_user_token', $token);
+        $user = $this->db->get('users')->first_row();
+
+        if (!is_null($user)) {
+            $this->db->set('confirm_user', true);
+            $this->db->where('email', $email);
+            $this->db->update('users');
+            return $user;
+        }
+        return false;
     }
 
 }

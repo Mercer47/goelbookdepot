@@ -13,6 +13,7 @@ class Auth extends CI_Controller
         $this->load->library('session');
         $this->load->library('form_validation');
         $this->load->helper('url');
+        $this->load->helper('string');
         $this->config->load('validation_rules');
         date_default_timezone_set('Asia/Kolkata');
     }
@@ -23,24 +24,38 @@ class Auth extends CI_Controller
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('auth/register');
         } else {
-            $userData = [
-                'name' => $this->input->post('name'),
-                'address' => $this->input->post('address'),
-                'phone' => $this->input->post('phone'),
-                'email' => $this->input->post('email'),
-                'password' => $this->input->post('password'),
-                'created_at' => date("Y-m-d H:i:s")
-            ];
+                $userData = [
+                    'name' => $this->input->post('name'),
+                    'address' => $this->input->post('address'),
+                    'phone' => $this->input->post('phone'),
+                    'email' => $this->input->post('email'),
+                    'password' => $this->input->post('password'),
+                    'created_at' => date("Y-m-d H:i:s"),
+                    'confirm_user_token' => random_string('alnum', 32)
+                ];
 
-            $user = $this->AuthModel->createUser($userData);
+                $user = $this->AuthModel->createUser($userData);
 
-            if ($user) {
-                $_SESSION['user_id'] = $user->id;
-                redirect(site_url('user'));
-            } else {
-                $this->session->set_flashdata('error', 'Cannot Create Account. Something went wrong');
-                redirect(site_url('home/register'));
-            }
+                if ($user) {
+                    $this->sendConfirmationMail($user);
+                } else {
+                    $this->session->set_flashdata('error', 'Account with this email already exists.');
+                    redirect(site_url('home/register'));
+                }
+        }
+    }
+
+    public function confirmUser($token)
+    {
+        $email = $_GET['email'];
+        $user = $this->AuthModel->confirmUser($token, $email);
+        if ($user) {
+            $_SESSION['user_id'] = $user->id;
+            $this->session->set_flashdata('success', 'Account Verified Successfully');
+            redirect(site_url('user'));
+        } else {
+            $this->session->set_flashdata('error', 'Invalid token provided. Cannot verify email');
+            redirect(site_url('home/signin'));
         }
     }
 
@@ -59,6 +74,10 @@ class Auth extends CI_Controller
             $user = $this->AuthModel->attemptLogin($credentials);
 
             if ($user) {
+                if (!$user->confirm_user) {
+                    $this->session->set_flashdata('error', 'Please verify your account before signin in');
+                    redirect('home/signin');
+                }
                 $_SESSION['user_id'] = $user->id;
                 if (isset($_SESSION['confirm_user'])) {
                     unset($_SESSION['confirm_user']);
@@ -79,8 +98,6 @@ class Auth extends CI_Controller
 
     public function sendResetLink()
     {
-        $this->load->helper('string');
-
         $emailId = $this->input->post('email');
 
         if ($this->validateEmail($emailId)) {
@@ -117,6 +134,7 @@ class Auth extends CI_Controller
             );
 
             $user = $this->AuthModel->updatePassword($user, $email);
+            unset($this->session->token);
             if ($user) {
                 $this->session->set_flashdata('success', 'Password Updated Successfully. Please Login');
                 redirect(site_url('home/signin'));
@@ -170,7 +188,7 @@ class Auth extends CI_Controller
             //local server setFrom
 //            $mail->setFrom('raghavkumakshay@gmail.com', 'GBD');
             //live server setFrom
-            $mail->setFrom('server@goelbookdepot.macmer.in', 'Goel Book Depot Shimla');
+            $mail->setFrom('service@goelbookdepot.macmer.in', 'Goel Book Depot Shimla');
             $mail->addAddress($mailParams['order']->Email, $mailParams['order']->Name);     // Add a recipient
 //            $mail->addAddress('ellen@example.com');               // Name is optional
 //            $mail->addReplyTo('info@example.com', 'Information');
@@ -189,6 +207,42 @@ class Auth extends CI_Controller
         } catch (Exception $e) {
             $this->session->set_flashdata('error', 'Could not send link. Something went wrong');
             redirect(site_url('auth/reset'));
+        }
+    }
+
+    public function sendConfirmationMail($user)
+    {
+        $link = '<a href="'.site_url('auth/confirmUser/').$user->confirm_user_token.'?email='.$user->email.'">'
+            .site_url('auth/confirmUser/').$user->confirm_user_token.
+            '?email='.$user->email.'</a>';
+        // Instantiation and passing `true` enables exceptions
+        $mail = new PHPMailer(true);
+
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'localhost';
+            $mail->SMTPAuth = false;
+            $mail->SMTPAutoTLS = false;
+            $mail->Port = 25;
+
+            $mail->setFrom('service@goelbookdepot.macmer.in', 'Goel Book Depot Shimla');
+            $mail->addAddress($user->email, $user->name);     // Add a recipient
+
+            // Content
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = 'Welcome To Goel Book Depot Shimla';
+            $mail->Body    = 'We are so pleased to have you as a member of Goel Book Depot Shimla. Welcome to the family.<br/>
+                              Please Confirm your email to sign in to your account. To confirm click on the following link: <br/>
+                              '.$link.' 
+                            <br/> With Regards <br/> Goel Book Depot Shimla';
+
+            $mail->send();
+
+            $this->session->set_flashdata('success', 'Account Created. Verification Email is sent to your email Id');
+            redirect(site_url('home/signin'));
+        } catch (Exception $e) {
+            $this->session->set_flashdata('error', 'Could not send Email to your provided Email Id.');
+            redirect(site_url('home/signin'));
         }
     }
 }

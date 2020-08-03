@@ -2,6 +2,12 @@
 
 <div class="col-md-12 form-container">
     <?php echo form_open(site_url('auth/signup'), array('method' => 'POST')) ?>
+        <?php if ($this->session->flashdata('error')) { ?>
+            <div class="col-md-12 error-bar">
+                <i class="las la-exclamation-triangle"></i>
+                <?php echo $this->session->flashdata('error') ?>
+            </div>
+        <?php } ?>
         <p class="form-heading">
             NAME
         </p>
@@ -95,13 +101,6 @@
                 '<div class="invalid-bar"><i class="las la-exclamation-triangle"></i> ',
                 '</div>')
             ?>
-        <?php } ?>
-
-        <?php if ($this->session->flashdata('error')) { ?>
-            <div class="col-md-12 error-bar">
-                <i class="las la-exclamation-triangle"></i>
-                <?php echo $this->session->flashdata('error') ?>
-            </div>
         <?php } ?>
 
         <button class="btn-sign-in">

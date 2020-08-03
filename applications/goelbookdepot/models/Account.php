@@ -22,19 +22,6 @@ class Account extends CI_Model
         $books = [];
         $sql = "SELECT * FROM orders WHERE user_id = ? ORDER BY Timestamp desc";
         $query = $this->db->query($sql, $userId);
-//        $booksIds = $query->result();
-//        foreach($booksIds as $id) {
-//            $ids = json_decode($id->Items);
-//            foreach($ids as $key => $value) {
-//                $sql = 'SELECT * FROM books WHERE id = ?';
-//                $query = $this->db->query($sql, $value);
-//                $books[$value] = $query->first_row();
-//                $books[$value]->date = $id->Timestamp;
-//                $books[$value]->status = $id->Status;
-//                $books[$value]->shipping_status = $id->shipping_status;
-//            }
-//        }
-//        return $books;
         return $query->result();
     }
 

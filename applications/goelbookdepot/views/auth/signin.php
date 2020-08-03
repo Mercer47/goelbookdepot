@@ -1,6 +1,12 @@
 <?php $this->view('layouts/header') ?>
     <div class="col-md-12 form-container">
         <?php echo form_open(site_url('auth/signin'), array('method' => 'POST')) ?>
+            <?php if ($this->session->flashdata('error')) { ?>
+                <div class="col-md-12 error-bar">
+                    <i class="las la-exclamation-triangle"></i>
+                    <?php echo $this->session->flashdata('error') ?>
+                </div>
+            <?php } ?>
             <?php if ($this->session->flashdata('success')) { ?>
                 <div class="col-md-12 success-bar">
                     <i class="las la-check-square"></i>
@@ -39,13 +45,6 @@
             <?php } ?>
 
             <br>
-            <?php if ($this->session->flashdata('error')) { ?>
-                <div class="col-md-12 error-bar">
-                    <i class="las la-exclamation-triangle"></i>
-                    <?php echo $this->session->flashdata('error') ?>
-                </div>
-            <?php } ?>
-
             <button class="btn-sign-in">
                 Sign In
             </button>
