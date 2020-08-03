@@ -189,7 +189,7 @@ class Auth extends CI_Controller
 //            $mail->setFrom('raghavkumakshay@gmail.com', 'GBD');
             //live server setFrom
             $mail->setFrom('service@goelbookdepot.macmer.in', 'Goel Book Depot Shimla');
-            $mail->addAddress($mailParams['order']->Email, $mailParams['order']->Name);     // Add a recipient
+            $mail->addAddress($emailId, 'Dear Customer');     // Add a recipient
 //            $mail->addAddress('ellen@example.com');               // Name is optional
 //            $mail->addReplyTo('info@example.com', 'Information');
 //            $mail->addCC('cc@example.com');
