@@ -61,7 +61,7 @@ class AuthModel extends CI_Model
         $user = $this->db->get('users')->first_row();
 
         if (!is_null($user)) {
-            $this->db->set('confirm_user', true);
+            $this->db->set('confirmed_user', true);
             $this->db->where('email', $email);
             $this->db->update('users');
             return $user;

@@ -5,3 +5,5 @@ deployment:
     - /bin/cp -R applications/goelbookdepot/controllers $DEPLOYPATH
     - /bin/cp -R applications/goelbookdepot/models $DEPLOYPATH
     - /bin/cp -R applications/goelbookdepot/views $DEPLOYPATH
+    - export DEPLOYPATH=/home/oxekim7dpn5n/public_html/gbd-test/assets
+    - /bin/cp -R assets/css $DEPLOYPATH
