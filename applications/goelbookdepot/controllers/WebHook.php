@@ -8,7 +8,7 @@ class WebHook extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('WebHookModel');
+        $this->load->model('WebhookModel');
         $this->config->load('credentials');
     }
 
@@ -54,7 +54,7 @@ class WebHook extends CI_Controller
         switch ($event->type) {
             case 'payment_intent.succeeded':
                 $paymentIntent = $event->data->object; // contains a StripePaymentIntent
-                $order = $this->WebHookModel->handlePaymentIntentSucceeded($paymentIntent);
+                $order = $this->WebhookModel->handlePaymentIntentSucceeded($paymentIntent);
                 if ($order) {
                     $subject = 'Order Confirmed';
                     $message = 'Dear '.$order->Name.', <br/> Thanks for buying books from Goel Book Depot.
@@ -73,15 +73,15 @@ class WebHook extends CI_Controller
                 break;
             case 'payment_method.attached':
                 $paymentMethod = $event->data->object; // contains a StripePaymentMethod
-                $this->WebHookModel->handlePaymentMethodAttached($paymentMethod);
+                $this->WebhookModel->handlePaymentMethodAttached($paymentMethod);
                 break;
             case 'payment_intent.processing';
                 $paymentIntent = $event->data->object;
-                $this->WebHookModel->handlePaymentIntentProcessing($paymentIntent);
+                $this->WebhookModel->handlePaymentIntentProcessing($paymentIntent);
                 break;
             case 'payment_intent.payment_failed';
                 $paymentIntent = $event->data->object;
-                $order = $this->WebHookModel->handlePaymentIntentFailed($paymentIntent);
+                $order = $this->WebhookModel->handlePaymentIntentFailed($paymentIntent);
                 if ($order) {
                     $subject = 'Order Failed';
                     $message = 'Dear '.$order->Name.', <br/> Thank You for placing an order on Goel Book Depot .
@@ -100,7 +100,7 @@ class WebHook extends CI_Controller
                 break;
             case 'payment_intent.canceled';
                 $paymentIntent = $event->data->object;
-                $this->WebHookModel->handlePaymentIntentCanceled($paymentIntent);
+                $this->WebhookModel->handlePaymentIntentCanceled($paymentIntent);
                 break;
             default:
                 // Unexpected event type
@@ -117,17 +117,29 @@ class WebHook extends CI_Controller
 
         try {
             //Server settings
-//            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
-            $mail->isSMTP();                                            // Send using SMTP
-            $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
-            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-            $mail->Username   = 'raghavkumakshay@gmail.com';                     // SMTP username
-            $mail->Password   = $this->config->item('GMAIL_SECRET');                               // SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-            $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
+            //Live server settings
+            $mail->isSMTP();
+            $mail->Host = 'localhost';
+            $mail->SMTPAuth = false;
+            $mail->SMTPAutoTLS = false;
+            $mail->Port = 25;
+
+            //local server settings
+//            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+//            $mail->isSMTP();                                            // Send using SMTP
+//            $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+//            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+//            $mail->Username   = 'raghavkumakshay@gmail.com';                     // SMTP username
+//            $mail->Password   = $this->config->item('GMAIL_SECRET');                               // SMTP password
+//            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+//            $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+//
             //Recipients
-            $mail->setFrom('raghavkumakshay@gmail.com', 'GBD');
+            //local server setFrom
+//            $mail->setFrom('raghavkumakshay@gmail.com', 'GBD');
+            //live server setFrom
+            $mail->setFrom('server@goelbookdepot.macmer.in', 'Goel Book Depot Shimla');
             $mail->addAddress($mailParams['order']->Email, $mailParams['order']->Name);     // Add a recipient
 //            $mail->addAddress('ellen@example.com');               // Name is optional
 //            $mail->addReplyTo('info@example.com', 'Information');
