@@ -77,29 +77,4 @@
         <?php } ?>
     </div>
 
-    <div class="loader-wrapper">
-        <span class="loader"><span class="loader-inner"></span></span>
-    </div>
-    </div>
-    <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.min.js') ?>"></script>
-    <script>
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "100%";
-        }
-
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-        }
-    </script>
-    <script>
-        $(window).on("load", function () {
-            $(".loader-wrapper").fadeOut("slow");
-        });
-    </script>
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
-</body>
-</html>
+<?php $this->view('layouts/inner_page_footer') ?>

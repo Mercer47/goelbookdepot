@@ -25,6 +25,7 @@
 
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
+        $(".loader-wrapper").fadeOut("slow");
     }
 </script>
 <script src="<?php echo base_url('assets/js/jquery.min.js') ?>"></script>
@@ -35,9 +36,6 @@
 </script>
 
 <script>
-
-
-
     function load_data(query)
     {
         $.ajax({
@@ -61,6 +59,13 @@
             $('#result').html(null);
         }
     });
+</script>
+<script>
+    $('a:not(.closebtn),button,i:not(.la-bars,.la-times)').on('click', function()
+    {
+        $(".loader-wrapper").fadeIn("slow");
+    })
+    $('')
 </script>
 
 </body>
