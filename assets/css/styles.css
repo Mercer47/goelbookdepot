@@ -355,6 +355,7 @@ ul#nav li{
 .bundle-wrapper
 {
 	padding-top: 50px;
+	font-family: Questrial-regular, serif;
 }
 
 .add-sign
@@ -363,7 +364,7 @@ ul#nav li{
 	font-size: 40px;
 	color: #f95555;
 	font-family: Questrial-regular, serif;
-	padding: 20px 0 20px 0;
+	padding: 10px 0 10px 0;
 }
 
 .gift-box
