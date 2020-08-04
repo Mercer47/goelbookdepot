@@ -593,6 +593,7 @@ ul#nav li{
 	top: 0;
 	left: 0;
 	background-color: #f95555;
+	z-index: 10 !important;
 }
 .loader {
 	display: inline-block;

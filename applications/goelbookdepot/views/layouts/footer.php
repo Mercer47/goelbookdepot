@@ -25,7 +25,6 @@
 
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
-        $(".loader-wrapper").fadeOut("slow");
     }
 </script>
 <script src="<?php echo base_url('assets/js/jquery.min.js') ?>"></script>
@@ -65,7 +64,6 @@
     {
         $(".loader-wrapper").fadeIn("slow");
     })
-    $('')
 </script>
 
 </body>
