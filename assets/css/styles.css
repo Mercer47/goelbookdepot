@@ -595,6 +595,7 @@ ul#nav li{
 	left: 0;
 	background-color: #f95555;
 	z-index: 10 !important;
+	opacity: 0.8;
 }
 .loader {
 	display: inline-block;
