@@ -37,11 +37,31 @@
         <div class="col-xs-2 side-icon">
                 <i class="las la-bars nav-icon" onclick="openNav()"></i>
         </div>
-        <div class="col-xs-8 col-sm-6 col-md-6 col-lg-6">
+        <div class="col-xs-8 col-sm-6 col-md-6 col-lg-4">
             <p class="site-heading" onclick="location.href='<?php echo site_url('home') ?>'">GOEL BOOK DEPOT</p>
         </div>
-        <div class="col-xs-2 col-lg-1 side-icon" align="right">
-            <i class="las la-shopping-cart nav-icon" onclick="location.href='<?php echo site_url('home/cart') ?>'"></i>
+        <div class="col-xs-2 col-md-1 col-lg-3 side-icon" align="right">
+            <i class="las la-shopping-cart nav-icon" title="Cart" onclick="location.href='<?php echo site_url('home/cart') ?>'"></i>
+            <span class="hide-sm" style="cursor: pointer">
+                <span onclick="location.href='<?php echo site_url('home/cart') ?>'">
+                    Cart
+                    <?= isset($_SESSION['cart']) ? "(".count($_SESSION['cart']).")" : "(".intval(0).")" ?>
+                </span>
+
+                <i class="las la-book nav-icon hide-sm"
+                        title="Bundle Store"
+                        onclick="location.href='<?php echo site_url('bundle') ?>'">
+                </i>
+
+                <span onclick="location.href='<?php echo site_url('bundle') ?>'">Bundles</span>
+
+                <i class="las la-sign-in-alt nav-icon hide-sm"
+                   title="Log In"
+                   onclick="location.href='<?php echo site_url('home/signin') ?>'">
+                </i>
+
+                <span onclick="location.href='<?php echo site_url('home/signin') ?>'">Sign In</span>
+            </span>
         </div>
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-5" style=" margin-top: 5px;" align="center">
             <input type="text" id="search_text" name="" placeholder="Search Over 1000+ books">

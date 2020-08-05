@@ -1,5 +1,5 @@
 <?php $this->view('layouts/user_header') ?>
-    <div class="col-md-10">
+    <div class="col-md-10 col-lg-4 user-box">
         <?php echo form_open(site_url('user/updatepassword'), array('method' => 'POST')) ?>
             <?php if ($this->session->flashdata('error')) { ?>
                 <div class="col-md-12 error-bar">

@@ -169,7 +169,7 @@ class Home extends CI_Controller
         if($result!=NULL) {
             foreach($result as $row) {
                   echo '
-                    <div class="col-xs-6" style="margin-top: 20px;">
+                    <div class="col-xs-6 col-md-3 col-lg-3" style="margin-top: 20px;">
                     <a href="'.site_url('home/showbook/').$row->id.'">
                     <img src="'.base_url('assets/thumbnails/').$row->image.'" class="book-image">
                     <p class="book-title">'.$row->title.'</p></a>

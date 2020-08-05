@@ -168,6 +168,8 @@ ul#nav li{
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
+	color: black !important;
+	font-family: Questrial-regular, serif;
 }
 
 .book-detail{
@@ -264,6 +266,7 @@ ul#nav li{
 	border-radius: 10px;
 	margin-top: 100px;
 	padding: 0!important;
+	cursor: pointer;
 }
 .img-cart{
 	width: 100%;
@@ -372,7 +375,9 @@ ul#nav li{
 	font-size: 20px;
 	text-align: center;
 	font-family: Questrial-regular, serif;
-	color: #00CC00;
+	background: #f95555;
+	color: #ffffff;
+	padding: 20px;
 }
 
 .error-bar
@@ -410,7 +415,7 @@ ul#nav li{
 	width: 100%;
 }
 
-
+/* What to display when screen is large */
 @media screen and (min-width: 700px) {
 	.site-heading{
 		text-align: left;
@@ -428,7 +433,11 @@ ul#nav li{
 	.side-icon{
 		position: absolute !important;
 		right: 0 !important;
-		font-size: 30px !important;
+		font-family: Questrial-regular, serif;
+		font-size: 16px;
+		color: #ffffff;
+		text-transform: uppercase;
+		top: 22px;
 	}
 	.sidenav{
 		display: none;
@@ -581,15 +590,58 @@ ul#nav li{
 		padding: 70px 0 70px 0 !important;
 	}
 	.nav-icon {
-		top: 10px !important;
+		top: 0 !important;
+		font-size: 18px !important;
+		margin-left: 10px !important;
+	}
+	.user-sidebar {
+		background: #f95555;
+		height: 2000px;
+		font-family: Questrial-regular, serif;
+		padding-top: 30px;
+	}
+	.user-sidebar a {
+		color: #ffffff;
+		display: block;
+		font-size: 16px;
+		margin-bottom: 20px;
+		text-decoration: none !important;
+	}
+	.user-sidebar i {
+		font-size: 25px;
+		margin-right: 10px;
+	}
+	.user-box {
+		padding: 15px 30px 15px 30px;
+		background: #ffffff !important;
+		border-radius: 5px;
+		margin-top: 20px;
+		font-family: Questrial-regular, serif;
 	}
 
+	.form-container {
+		margin-top: 75px !important;
+	}
+
+	.hide-lg {
+		display: none !important;
+	}
+	.add-sign {
+		margin-top: 100px !important;
+	}
+}
+
+/* What to display when screen is small */
+@media screen and (max-width: 400px) {
+	.hide-sm {
+		display: none !important;
+	}
 }
 
 /* loader-css  */
 .loader-wrapper{
 	width: 100%;
-	height: 100%;
+	height: 2000px;
 	position: absolute;
 	top: 0;
 	left: 0;
