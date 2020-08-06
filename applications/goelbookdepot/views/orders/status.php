@@ -20,7 +20,8 @@
 </head>
 
 <body style="background: #f95555">
-    <div style="position: relative; top: 30%; text-align: center;">
+<div class="col-lg-4"></div>
+    <div class="col-xs-12 col-lg-4" style="position: relative; top: 30%; text-align: center;">
         <?php if ($status) { ?>
         <i class="las la-check-circle" style="color: #ffffff; font-size: 100px; margin-bottom: 20px;"></i>
         <p style="font-family: Questrial-regular,serif; font-size: 30px; color: #ffffff;"><?php echo urldecode($message) ?></p>

@@ -3,13 +3,13 @@
         <div class="col-md-12 col-lg-4 form-container user-box">
             <?php echo form_open(site_url('auth/signin'), array('method' => 'POST')) ?>
                 <?php if ($this->session->flashdata('error')) { ?>
-                    <div class="col-md-12 error-bar">
+                    <div class="col-md-12 col-lg-12 error-bar">
                         <i class="las la-exclamation-triangle"></i>
                         <?php echo $this->session->flashdata('error') ?>
                     </div>
                 <?php } ?>
                 <?php if ($this->session->flashdata('success')) { ?>
-                    <div class="col-md-12 success-bar">
+                    <div class="col-md-12 col-lg-12 success-bar">
                         <i class="las la-check-square"></i>
                         <?php echo $this->session->flashdata('success') ?>
                     </div>

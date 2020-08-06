@@ -389,7 +389,6 @@ ul#nav li{
 	margin-top: 10px;
 	border: 1px solid #f95555;
 	padding: 5px;
-	width: 100%;
 }
 
 .invalid-bar
@@ -399,7 +398,6 @@ ul#nav li{
 	color: #f95555;
 	font-size: 16px;
 	margin-top: 10px;
-	width: 100%;
 }
 
 .success-bar
@@ -412,7 +410,6 @@ ul#nav li{
 	margin-bottom: 10px;
 	border: 1px solid #2995bf;
 	padding: 5px;
-	width: 100%;
 }
 
 /* What to display when screen is large */
@@ -632,7 +629,7 @@ ul#nav li{
 }
 
 /* What to display when screen is small */
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 700px) {
 	.hide-sm {
 		display: none !important;
 	}

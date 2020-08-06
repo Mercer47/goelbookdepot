@@ -3,6 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Checkout</title>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/styles.css'); ?>">
     <script src="https://js.stripe.com/v3/"></script>
     <style>
         @font-face{
@@ -68,9 +69,9 @@
         }
     </style>
 </head>
-<body>
-    <div class="row">
-        <div class="col-md-12">
+<body style="background: #f2f2f2">
+        <div class="col-lg-4"></div>
+        <div class="col-md-12 col-lg-4 form-container user-box">
             <p class="checkout-heading">Complete Your Payment</p>
             <form id="payment-form">
                 <div id="card-element">
@@ -83,7 +84,6 @@
                     <button id="card-button">Pay</button>
             </form>
         </div>
-    </div>
     <div id="loader">
 
     </div>
