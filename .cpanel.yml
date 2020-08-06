@@ -5,7 +5,7 @@ deployment:
     - /bin/cp -R applications $DEPLOYPATH
     - /bin/cp -R assets $DEPLOYPATH
     - /bin/cp -R system $DEPLOYPATH
-    - /bin/cp -R test $DEPLOYPATH
+    - /bin/cp -R tests $DEPLOYPATH
     - /bin/cp -R vendor $DEPLOYPATH
     - /bin/cp -R admin.php $DEPLOYPATH
     - /bin/cp -R index.php $DEPLOYPATH
