@@ -3,8 +3,8 @@ deployment:
   tasks:
 #    - export DEPLOYPATH=/home/x447x173y962/public_html/applications/gbdadmin/config
 #    - /bin/cp -R applications/gbdadmin/config/production $DEPLOYPATH
-#    - export DEPLOYPATH=/home/x447x173y962/public_html/applications/goelbookdepot/config
-#    - /bin/cp -R applications/goelbookdepot/config/production $DEPLOYPATH
+    - export DEPLOYPATH=/home/x447x173y962/public_html/applications/goelbookdepot/config
+    - /bin/cp -R applications/goelbookdepot/config/validation_rules.php $DEPLOYPATH
     - export DEPLOYPATH=/home/x447x173y962/public_html/
 #    - /bin/cp -R applications $DEPLOYPATH
     - /bin/cp -R assets $DEPLOYPATH
