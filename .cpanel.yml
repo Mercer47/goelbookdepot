@@ -2,11 +2,11 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/oxekim7dpn5n/public_html/gbd-test/applications/goelbookdepot
-    - /bin/cp -R applications/goelbookdepot/controllers $DEPLOYPATH
-    - /bin/cp -R applications/goelbookdepot/models $DEPLOYPATH
+#    - /bin/cp -R applications/goelbookdepot/controllers $DEPLOYPATH
+#    - /bin/cp -R applications/goelbookdepot/models $DEPLOYPATH
     - /bin/cp -R applications/goelbookdepot/views $DEPLOYPATH
-    - export DEPLOYPATH=/home/oxekim7dpn5n/public_html/gbd-test
-    - /bin/cp -R assets $DEPLOYPATH
+#    - export DEPLOYPATH=/home/oxekim7dpn5n/public_html/gbd-test
+#    - /bin/cp -R assets $DEPLOYPATH
 #    - export DEPLOYPATH=/home/oxekim7dpn5n/public_html/gbd-test/applications/gbdadmin
 #    - /bin/cp -R applications/gbdadmin/views $DEPLOYPATH
 #    - export DEPLOYPATH=/home/oxekim7dpn5n/public_html/gbd-test/applications/gbdadmin/config
