@@ -7,6 +7,7 @@ class AuthModel extends CI_Model
     {
         parent::__construct();
         $this->load->database();
+        date_default_timezone_set('Asia/Kolkata');
     }
 
     public function createUser($userData)
@@ -83,7 +84,7 @@ class AuthModel extends CI_Model
         $user = $this->db->get('users')->first_row();
 
         if (!is_null($user)) {
-            if (time() - strtotime($user->updated_at) < 600) {
+            if (time() - strtotime(date("Y-m-d H:i:s", strtotime($user->updated_at))) < 600) {
                 return true;
             }
             return false;
