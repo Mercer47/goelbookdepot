@@ -169,27 +169,27 @@ class Auth extends CI_Controller
             //Server settings
 
             //Live server settings
-//            $mail->isSMTP();
-//            $mail->Host = 'localhost';
-//            $mail->SMTPAuth = false;
-//            $mail->SMTPAutoTLS = false;
-//            $mail->Port = 25;
+            $mail->isSMTP();
+            $mail->Host = 'localhost';
+            $mail->SMTPAuth = false;
+            $mail->SMTPAutoTLS = false;
+            $mail->Port = 25;
 
             //local server settings
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
-            $mail->isSMTP();                                            // Send using SMTP
-            $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
-            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-            $mail->Username   = 'raghavkumakshay@gmail.com';                     // SMTP username
-            $mail->Password   = $this->config->item('GMAIL_SECRET');                               // SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-            $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+//            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+//            $mail->isSMTP();                                            // Send using SMTP
+//            $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+//            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+//            $mail->Username   = 'raghavkumakshay@gmail.com';                     // SMTP username
+//            $mail->Password   = $this->config->item('GMAIL_SECRET');                               // SMTP password
+//            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+//            $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
             //Recipients
             //local server setFrom
-            $mail->setFrom('raghavkumakshay@gmail.com', 'GBD');
+//            $mail->setFrom('raghavkumakshay@gmail.com', 'GBD');
             //live server setFrom
-//            $mail->setFrom('service@goelbookdepot.macmer.in', 'Goel Book Depot Shimla');
+            $mail->setFrom('service@goelbookdepot.macmer.in', 'Goel Book Depot Shimla');
             $mail->addAddress($emailId, 'Dear Customer');     // Add a recipient
 //            $mail->addAddress('ellen@example.com');               // Name is optional
 //            $mail->addReplyTo('info@example.com', 'Information');
