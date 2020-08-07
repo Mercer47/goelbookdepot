@@ -90,7 +90,7 @@
 
     <script src="<?php echo base_url('assets/js/jquery.min.js') ?>"></script>
     <script>
-        var stripe = Stripe('pk_test_51H3hLRE7tUzyZRD9XNb1pTLxWGKIfhHtXHyoYb36uBOcmx4FJ0Cpb4FSuTeLHvLAPXlS8L0qXkN64XBND4Exhzht00dzWwWx4Q');
+        var stripe = Stripe('<?php echo $this->config->item('STRIPE_PUBLISH_KEY') ?>');
         var elements = stripe.elements();
     </script>
     <script>
