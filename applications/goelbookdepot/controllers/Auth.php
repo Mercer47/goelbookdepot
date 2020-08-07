@@ -98,13 +98,19 @@ class Auth extends CI_Controller
 
     public function sendResetLink()
     {
-        $emailId = $this->input->post('email');
+        $this->form_validation->set_rules($this->config->item('reset-password'));
 
-        if ($this->validateEmail($emailId)) {
-            $this->sendMail($emailId);
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('auth/reset');
         } else {
-            $this->session->set_flashdata('error', 'Account does not exist');
-            redirect(site_url('auth/reset'));
+            $emailId = $this->input->post('email');
+
+            if ($this->validateEmail($emailId)) {
+                $this->sendMail($emailId);
+            } else {
+                $this->session->set_flashdata('error', 'Account does not exist');
+                redirect(site_url('auth/reset'));
+            }
         }
     }
 
@@ -153,6 +159,30 @@ class Auth extends CI_Controller
             return true;
         }
         return false;
+    }
+
+    public function reVerify()
+    {
+        $this->load->view('auth/reverify');
+    }
+
+    public function sendVerificationLink()
+    {
+        $this->form_validation->set_rules($this->config->item('reset-password'));
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('auth/reverify');
+        } else {
+            $emailId = $this->input->post('email');
+
+            if ($this->validateEmail($emailId)) {
+                $user = $this->AuthModel->getUserByEmail($emailId);
+                $this->sendConfirmationMail($user);
+            } else {
+                $this->session->set_flashdata('error', 'Account does not exist');
+                redirect(site_url('auth/reverify'));
+            }
+        }
     }
 
     public function sendMail($emailId)
@@ -241,12 +271,12 @@ class Auth extends CI_Controller
                 $this->session->set_flashdata('success', 'Account Created. Verification Email is sent to your email Id');
                 redirect(site_url('home/signin'));
             } else {
-                $this->session->set_flashdata('error', 'Could not send Email to your provided Email Id.');
-                redirect(site_url('home/signin'));
+                $this->session->set_flashdata('error', 'Could not send link. Something went wrong.');
+                redirect(site_url('auth/reverify'));
             }
         } catch (Exception $e) {
-            $this->session->set_flashdata('error', 'Could not send Email to your provided Email Id.');
-            redirect(site_url('home/signin'));
+            $this->session->set_flashdata('error', 'Could not send link. Something went wrong.');
+            redirect(site_url('auth/reverify'));
         }
     }
 }

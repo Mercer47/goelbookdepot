@@ -179,3 +179,14 @@ $config['change-password'] =[
         ]
     ],
 ];
+
+$config['reset-password'] = [
+    [
+        'field' => 'email',
+        'rules' => 'required|valid_email',
+        'errors' => [
+            'required' => 'Email is required',
+            'valid_email' => 'Must be a Valid email'
+        ]
+    ]
+];

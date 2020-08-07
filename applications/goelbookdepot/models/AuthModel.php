@@ -93,4 +93,10 @@ class AuthModel extends CI_Model
         return false;
     }
 
+    public function getUserByEmail($email)
+    {
+        return $this->db->get_where('users', array('email' => $email))
+            ->first_row();
+    }
+
 }
