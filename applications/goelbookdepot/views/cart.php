@@ -23,9 +23,21 @@
                 foreach ($result as $row) { ?>
                     <div class="col-xs-12 col-lg-3 cart-item">
                         <div class="col-xs-4 col-lg-12">
-                            <a href="" style=" color: black;"><img
-                                        src="<?php echo base_url('assets/thumbnails/') . $row->image; ?>"
-                                        class="img-cart"></a>
+                            <a href="" style=" color: black;">
+                                <?php if ($row->image) { ?>
+                                    <img
+                                            src="<?php echo base_url('assets/thumbnails/') . $row->image; ?>"
+                                            class="img-cart"
+                                            alt=""
+                                    />
+                                <?php } else { ?>
+                                    <img
+                                            src="<?php echo base_url('assets/icons/no-image.png') ?>"
+                                            class="img-cart"
+                                            alt=""
+                                    />
+                                <?php } ?>
+                            </a>
                         </div>
                         <div class="col-xs-8 col-lg-8 cart-item-detail">
                             <p><?php echo $row->title; ?></p>

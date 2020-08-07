@@ -5,7 +5,19 @@
             <div class="col-xs-12 col-lg-2 bundle-wrapper cart-item">
                 <a href="<?php echo site_url('home/showbook/').$book->id ?>">
                     <div class="col-xs-4 col-lg-12">
-                        <img src="<?php echo base_url('assets/thumbnails/').$book->image ?>" style="width: 100%" />
+                        <?php if ($book->image) { ?>
+                            <img
+                                    src="<?php echo base_url('assets/thumbnails/') . $book->image; ?>"
+                                    style="width: 100%;"
+                                    alt=""
+                            />
+                        <?php } else { ?>
+                            <img
+                                    src="<?php echo base_url('assets/icons/no-image.png') ?>"
+                                    style="width: 100%;"
+                                    alt=""
+                            />
+                        <?php } ?>
                     </div>
                 </a>
                 <div class="col-xs-8 col-lg-12">
