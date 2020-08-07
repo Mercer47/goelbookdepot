@@ -7,13 +7,14 @@
             Total: ₹<?php echo $total; ?>
         </div>
     </div>
-
-    <?php if ($this->session->flashdata('success')) { ?>
-        <div class="col-xs-12 col-lg-4 success-bar">
-            <i class="las la-check-square"></i>
-            <?php echo $this->session->flashdata('success') ?>
-        </div>
-    <?php } ?>
+    <div class="col-lg-12">
+        <?php if ($this->session->flashdata('success')) { ?>
+            <div class="col-xs-12 col-lg-4 success-bar">
+                <i class="las la-check-square"></i>
+                <?php echo $this->session->flashdata('success') ?>
+            </div>
+        <?php } ?>
+    </div>
 
     <?php if (isset($_SESSION['cart'])) {
             foreach ($_SESSION['cart'] as $key => $value) {
