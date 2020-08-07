@@ -27,7 +27,10 @@
                 />
 
                 <?php if (form_error('email')) { ?>
-                    <?php echo form_error('email','<div class="invalid-bar"><i class="las la-exclamation-triangle"></i> ','</div>') ?>
+                    <?php echo form_error('email',
+                        '<div class="invalid-bar"><i class="las la-exclamation-triangle"></i> ',
+                        '</div>')
+                    ?>
                 <?php } ?>
 
                 <p class="form-heading">
@@ -61,6 +64,13 @@
                     No Account? Create account
                     <a href="<?php echo site_url('home/register') ?>">
                         here
+                    </a>
+                </p>
+
+                <p class="form-info">
+                    Did'nt Received Verification Email?
+                    <a href="<?php echo site_url('auth/reverify') ?>">
+                        Resend
                     </a>
                 </p>
             </form>

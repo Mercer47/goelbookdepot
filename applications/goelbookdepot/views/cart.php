@@ -7,13 +7,14 @@
             Total: ₹<?php echo $total; ?>
         </div>
     </div>
-
-    <?php if ($this->session->flashdata('success')) { ?>
-        <div class="col-xs-12 col-lg-4 success-bar">
-            <i class="las la-check-square"></i>
-            <?php echo $this->session->flashdata('success') ?>
-        </div>
-    <?php } ?>
+    <div class="col-lg-12">
+        <?php if ($this->session->flashdata('success')) { ?>
+            <div class="col-xs-12 col-lg-4 success-bar">
+                <i class="las la-check-square"></i>
+                <?php echo $this->session->flashdata('success') ?>
+            </div>
+        <?php } ?>
+    </div>
 
     <?php if (isset($_SESSION['cart'])) {
             foreach ($_SESSION['cart'] as $key => $value) {
@@ -23,9 +24,21 @@
                 foreach ($result as $row) { ?>
                     <div class="col-xs-12 col-lg-3 cart-item">
                         <div class="col-xs-4 col-lg-12">
-                            <a href="" style=" color: black;"><img
-                                        src="<?php echo base_url('assets/thumbnails/') . $row->image; ?>"
-                                        class="img-cart"></a>
+                            <a href="" style=" color: black;">
+                                <?php if ($row->image) { ?>
+                                    <img
+                                            src="<?php echo base_url('assets/thumbnails/') . $row->image; ?>"
+                                            class="img-cart"
+                                            alt=""
+                                    />
+                                <?php } else { ?>
+                                    <img
+                                            src="<?php echo base_url('assets/icons/no-image.png') ?>"
+                                            class="img-cart"
+                                            alt=""
+                                    />
+                                <?php } ?>
+                            </a>
                         </div>
                         <div class="col-xs-8 col-lg-8 cart-item-detail">
                             <p><?php echo $row->title; ?></p>

@@ -25,6 +25,13 @@
                     class="form-input"
                     value="<?php echo set_value('email') ?>"
                 />
+                <?php if (form_error('email')) { ?>
+                    <?php echo form_error('email',
+                        '<div class="invalid-bar"><i class="las la-exclamation-triangle"></i> ',
+                        '</div>')
+                    ?>
+                <?php } ?>
+
                 <button class="btn-sign-in">
                     Send Reset Link
                 </button>

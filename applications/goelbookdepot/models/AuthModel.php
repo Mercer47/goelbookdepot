@@ -7,6 +7,7 @@ class AuthModel extends CI_Model
     {
         parent::__construct();
         $this->load->database();
+        date_default_timezone_set('Asia/Kolkata');
     }
 
     public function createUser($userData)
@@ -67,6 +68,35 @@ class AuthModel extends CI_Model
             return $user;
         }
         return false;
+    }
+
+    public function createNewPasswordToken($email, $token)
+    {
+        $this->db->set('password_reset_token', $token);
+        $this->db->set('updated_at', date("Y-m-d H:i:s"));
+        $this->db->where('email', $email);
+        $this->db->update('users');
+    }
+
+    public function validatePasswordResetToken($token, $email)
+    {
+        $this->db->where('email', $email);
+        $this->db->where('password_reset_token', $token);
+        $user = $this->db->get('users')->first_row();
+
+        if (!is_null($user)) {
+            if (time() - strtotime(date("Y-m-d H:i:s", strtotime($user->updated_at))) < 600) {
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    public function getUnverifiedUserByEmail($email)
+    {
+        return $this->db->get_where('users', array('email' => $email, 'confirmed_user' => 0))
+            ->first_row();
     }
 
 }

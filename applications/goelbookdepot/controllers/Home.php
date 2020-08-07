@@ -58,27 +58,18 @@ class Home extends CI_Controller
 		$this->load->database();
 
 		//inserting an item to cart
-		if (isset($_POST['id']))
-		{
-            $id=$_POST['id'];
-            //create a session if no book has been added
-            if (!isset($_SESSION['cart']))
-            {
-                $_SESSION['cart']=array();
-                $_SESSION['cart'][]=$id;
-            }
-            else
-            {
-                foreach ($_SESSION['cart'] as $key => $value) {
-                    //if a book is already added
-                    if ($value == $id) {
-                        break;
-                    } else {
-                        // if a book is not yet added
-                        $_SESSION['cart'][]=$id;
-                    }
-                }
+		if (isset($_POST['id'])) {
+            $id = $_POST['id'];
 
+            //create a session if no book has been added
+            if (!isset($_SESSION['cart'])) {
+                $_SESSION['cart'] = array();
+                $_SESSION['cart'][] = $id;
+            } else {
+                //if a book does not already exists in cart add the book to cart
+                if (!in_array($id, $_SESSION['cart'])) {
+                    $_SESSION['cart'][] = $id;
+                }
             }
         }
 

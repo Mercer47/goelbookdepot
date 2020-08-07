@@ -1,5 +1,7 @@
 <?php $this->view('layouts/header'); ?>
-<div class="col-md-10">
+
+<div class="col-lg-4"></div>
+<div class="col-md-10 col-lg-4 form-container user-box">
     <?php echo form_open(site_url('auth/updatepassword'), array('method' => 'POST')) ?>
         <p class="form-heading">
             New Password
@@ -38,4 +40,6 @@
         </button>
     </form>
 </div>
+<div class="col-lg-4"></div>
+
 <?php $this->view('layouts/footer'); ?>

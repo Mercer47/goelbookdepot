@@ -22,10 +22,22 @@
             <?php foreach (json_decode($order->Items) as $id) {
                 $book = $this->db->get_where('books', array('id' => $id))
                     ->first_row(); ?>
-                <div class="col-xs-12 col-lg-3 orders-item cart-item">
+                <div class="col-xs-12 col-lg-2 orders-item cart-item">
                     <a href="<?php echo site_url('home/showbook/').$book->id ?>">
                         <div class="col-xs-4 col-lg-12">
-                            <img src="<?php echo base_url('assets/thumbnails/').$book->image;  ?>" style="width: 100%; padding-top: 10px" />
+                            <?php if ($book->image) { ?>
+                                <img
+                                        src="<?php echo base_url('assets/thumbnails/') . $book->image; ?>"
+                                        style="width: 100%; padding-top: 10px"
+                                        alt=""
+                                />
+                            <?php } else { ?>
+                                <img
+                                        src="<?php echo base_url('assets/icons/no-image.png') ?>"
+                                        style="width: 100%; padding-top: 10px"
+                                        alt=""
+                                />
+                            <?php } ?>
                         </div>
                     </a>
                     <div class="col-xs-8 col-lg-12">

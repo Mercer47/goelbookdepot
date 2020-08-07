@@ -98,19 +98,25 @@ class Auth extends CI_Controller
 
     public function sendResetLink()
     {
-        $emailId = $this->input->post('email');
+        $this->form_validation->set_rules($this->config->item('reset-password'));
 
-        if ($this->validateEmail($emailId)) {
-            $this->sendMail($emailId);
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('auth/reset');
         } else {
-            $this->session->set_flashdata('error', 'Account does not exist');
-            redirect(site_url('auth/reset'));
+            $emailId = $this->input->post('email');
+
+            if ($this->validateEmail($emailId)) {
+                $this->sendMail($emailId);
+            } else {
+                $this->session->set_flashdata('error', 'Account does not exist');
+                redirect(site_url('auth/reset'));
+            }
         }
     }
 
     public function createNewPassword($token)
     {
-        if (isset($this->session->token) && strcmp($token, $this->session->token) == 0) {
+        if ($this->AuthModel->validatePasswordResetToken($token, $_GET['email'])) {
             $data['email'] = $_GET['email'];
             $this->load->view('auth/newpassword', $data);
         } else {
@@ -131,10 +137,11 @@ class Auth extends CI_Controller
             $email = $this->input->post('email');
             $user = array(
                 'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
+                'password_reset_token' => NULL,
             );
 
             $user = $this->AuthModel->updatePassword($user, $email);
-            unset($this->session->token);
+
             if ($user) {
                 $this->session->set_flashdata('success', 'Password Updated Successfully. Please Login');
                 redirect(site_url('home/signin'));
@@ -154,11 +161,39 @@ class Auth extends CI_Controller
         return false;
     }
 
+    public function reVerify()
+    {
+        $this->load->view('auth/reverify');
+    }
+
+    public function sendVerificationLink()
+    {
+        $this->form_validation->set_rules($this->config->item('reset-password'));
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('auth/reverify');
+        } else {
+            $emailId = $this->input->post('email');
+
+            if ($this->validateEmail($emailId)) {
+                $user = $this->AuthModel->getUnverifiedUserByEmail($emailId);
+                if (is_null($user)) {
+                    $this->session->set_flashdata('success', 'Account already Verified');
+                    redirect(site_url('auth/reverify'));
+                }
+                $this->sendConfirmationMail($user);
+            } else {
+                $this->session->set_flashdata('error', 'Account does not exist');
+                redirect(site_url('auth/reverify'));
+            }
+        }
+    }
+
     public function sendMail($emailId)
     {
         $this->config->load('credentials');
         $token = random_string('alnum', 32);
-        $this->session->set_tempdata('token', $token, 300);
+        $this->AuthModel->createNewPasswordToken($emailId, $token);
         $link = '<a href="'.site_url('auth/createnewpassword/').$token.'?email='.$emailId.'">'.site_url('auth/createnewpassword/').$token.'?email='.$emailId.'</a>';
 
         // Instantiation and passing `true` enables exceptions
@@ -183,7 +218,7 @@ class Auth extends CI_Controller
 //            $mail->Password   = $this->config->item('GMAIL_SECRET');                               // SMTP password
 //            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
 //            $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
-//
+
             //Recipients
             //local server setFrom
 //            $mail->setFrom('raghavkumakshay@gmail.com', 'GBD');
@@ -198,7 +233,7 @@ class Auth extends CI_Controller
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = 'Reset Your Password';
-            $mail->Body    = 'The link for your password reset is '.$link.' This Link will get expire in 5 minutes.';
+            $mail->Body    = 'The link for your password reset is '.$link.' This Link will get expire in 10 minutes.';
 //            $mail->AltBody = 'The link for your password reset is '.$link;
 
             $mail->send();
@@ -240,12 +275,12 @@ class Auth extends CI_Controller
                 $this->session->set_flashdata('success', 'Account Created. Verification Email is sent to your email Id');
                 redirect(site_url('home/signin'));
             } else {
-                $this->session->set_flashdata('error', 'Could not send Email to your provided Email Id.');
-                redirect(site_url('home/signin'));
+                $this->session->set_flashdata('error', 'Could not send link. Something went wrong.');
+                redirect(site_url('auth/reverify'));
             }
         } catch (Exception $e) {
-            $this->session->set_flashdata('error', 'Could not send Email to your provided Email Id.');
-            redirect(site_url('home/signin'));
+            $this->session->set_flashdata('error', 'Could not send link. Something went wrong.');
+            redirect(site_url('auth/reverify'));
         }
     }
 }
