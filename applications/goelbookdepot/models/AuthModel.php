@@ -69,4 +69,26 @@ class AuthModel extends CI_Model
         return false;
     }
 
+    public function createNewPasswordToken($email, $token)
+    {
+        $this->db->set('password_reset_token', $token);
+        $this->db->where('email', $email);
+        $this->db->update('users');
+    }
+
+    public function validatePasswordResetToken($token, $email)
+    {
+        $this->db->where('email', $email);
+        $this->db->where('password_reset_token', $token);
+        $user = $this->db->get('users')->first_row();
+
+        if (!is_null($user)) {
+            if (time() - strtotime($user->updated_at) < 600) {
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
 }

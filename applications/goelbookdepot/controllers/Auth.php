@@ -110,7 +110,7 @@ class Auth extends CI_Controller
 
     public function createNewPassword($token)
     {
-        if (isset($this->session->token) && strcmp($token, $this->session->token) == 0) {
+        if ($this->AuthModel->validatePasswordResetToken($token, $_GET['email'])) {
             $data['email'] = $_GET['email'];
             $this->load->view('auth/newpassword', $data);
         } else {
@@ -131,10 +131,11 @@ class Auth extends CI_Controller
             $email = $this->input->post('email');
             $user = array(
                 'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
+                'password_reset_token' => NULL,
             );
 
             $user = $this->AuthModel->updatePassword($user, $email);
-            unset($this->session->token);
+
             if ($user) {
                 $this->session->set_flashdata('success', 'Password Updated Successfully. Please Login');
                 redirect(site_url('home/signin'));
@@ -158,7 +159,7 @@ class Auth extends CI_Controller
     {
         $this->config->load('credentials');
         $token = random_string('alnum', 32);
-        $this->session->set_tempdata('token', $token, 300);
+        $this->AuthModel->createNewPasswordToken($emailId, $token);
         $link = '<a href="'.site_url('auth/createnewpassword/').$token.'?email='.$emailId.'">'.site_url('auth/createnewpassword/').$token.'?email='.$emailId.'</a>';
 
         // Instantiation and passing `true` enables exceptions
@@ -168,27 +169,27 @@ class Auth extends CI_Controller
             //Server settings
 
             //Live server settings
-            $mail->isSMTP();
-            $mail->Host = 'localhost';
-            $mail->SMTPAuth = false;
-            $mail->SMTPAutoTLS = false;
-            $mail->Port = 25;
+//            $mail->isSMTP();
+//            $mail->Host = 'localhost';
+//            $mail->SMTPAuth = false;
+//            $mail->SMTPAutoTLS = false;
+//            $mail->Port = 25;
 
             //local server settings
-//            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
-//            $mail->isSMTP();                                            // Send using SMTP
-//            $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
-//            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-//            $mail->Username   = 'raghavkumakshay@gmail.com';                     // SMTP username
-//            $mail->Password   = $this->config->item('GMAIL_SECRET');                               // SMTP password
-//            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-//            $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
-//
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+            $mail->isSMTP();                                            // Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+            $mail->Username   = 'raghavkumakshay@gmail.com';                     // SMTP username
+            $mail->Password   = $this->config->item('GMAIL_SECRET');                               // SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+            $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+
             //Recipients
             //local server setFrom
-//            $mail->setFrom('raghavkumakshay@gmail.com', 'GBD');
+            $mail->setFrom('raghavkumakshay@gmail.com', 'GBD');
             //live server setFrom
-            $mail->setFrom('service@goelbookdepot.macmer.in', 'Goel Book Depot Shimla');
+//            $mail->setFrom('service@goelbookdepot.macmer.in', 'Goel Book Depot Shimla');
             $mail->addAddress($emailId, 'Dear Customer');     // Add a recipient
 //            $mail->addAddress('ellen@example.com');               // Name is optional
 //            $mail->addReplyTo('info@example.com', 'Information');
@@ -198,7 +199,7 @@ class Auth extends CI_Controller
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = 'Reset Your Password';
-            $mail->Body    = 'The link for your password reset is '.$link.' This Link will get expire in 5 minutes.';
+            $mail->Body    = 'The link for your password reset is '.$link.' This Link will get expire in 10 minutes.';
 //            $mail->AltBody = 'The link for your password reset is '.$link;
 
             $mail->send();
