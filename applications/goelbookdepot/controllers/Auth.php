@@ -176,7 +176,11 @@ class Auth extends CI_Controller
             $emailId = $this->input->post('email');
 
             if ($this->validateEmail($emailId)) {
-                $user = $this->AuthModel->getUserByEmail($emailId);
+                $user = $this->AuthModel->getUnverifiedUserByEmail($emailId);
+                if (is_null($user)) {
+                    $this->session->set_flashdata('success', 'Account already Verified');
+                    redirect(site_url('auth/reverify'));
+                }
                 $this->sendConfirmationMail($user);
             } else {
                 $this->session->set_flashdata('error', 'Account does not exist');

@@ -93,9 +93,9 @@ class AuthModel extends CI_Model
         return false;
     }
 
-    public function getUserByEmail($email)
+    public function getUnverifiedUserByEmail($email)
     {
-        return $this->db->get_where('users', array('email' => $email))
+        return $this->db->get_where('users', array('email' => $email, 'confirmed_user' => 0))
             ->first_row();
     }
 
