@@ -73,6 +73,7 @@ class AuthModel extends CI_Model
     public function createNewPasswordToken($email, $token)
     {
         $this->db->set('password_reset_token', $token);
+        $this->db->set('updated_at', date("Y-m-d H:i:s"));
         $this->db->where('email', $email);
         $this->db->update('users');
     }
