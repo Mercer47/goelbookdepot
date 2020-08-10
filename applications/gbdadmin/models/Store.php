@@ -123,6 +123,9 @@ class Store extends CI_Model
         $this->db->set('shipping_status', $status);
         $this->db->where('OrderId', $orderId);
         $this->db->update('orders');
+        return $this->db
+            ->get_where('orders', array('OrderId' => $orderId))
+            ->first_row();
     }
 
     public function createBundle($bundle)
