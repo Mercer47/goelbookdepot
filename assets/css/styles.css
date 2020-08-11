@@ -413,6 +413,31 @@ ul#nav li{
 	padding: 5px;
 }
 
+.bottom-bar
+{
+	background: #f95555;
+	color: #ffffff !important;
+	font-family: Questrial-regular, serif;
+	padding: 20px 0 20px 20px;
+}
+
+.bottom-bar a {
+	color: #ffffff !important;
+	display: block;
+	text-decoration: none;
+	margin-bottom: 5px !important;
+	font-size: 15px;
+}
+
+.bottom-bar i {
+	margin-right: 10px;
+}
+
+.bottom-bar-heading
+{
+	font-size: 20px;
+}
+
 /* What to display when screen is large */
 @media screen and (min-width: 700px) {
 	.site-heading{
@@ -619,6 +644,7 @@ ul#nav li{
 
 	.form-container {
 		margin-top: 75px !important;
+		margin-bottom: 200px !important;
 	}
 
 	.hide-lg {

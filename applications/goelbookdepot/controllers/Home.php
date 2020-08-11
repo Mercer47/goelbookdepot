@@ -292,5 +292,10 @@ class Home extends CI_Controller
         $this->load->library('form_validation');
 	    $this->load->view('auth/register');
     }
+
+    public function upcoming()
+    {
+        $this->load->view('templates/coming');
+    }
 }
 ?>
