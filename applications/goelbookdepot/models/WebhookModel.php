@@ -11,50 +11,30 @@ class WebhookModel extends CI_Model
 
     public function updateOrder($message)
     {
-        $this->db->set('Status', 'Webhook Tested');
-        $this->db->where('OrderId >', 0);
+        switch($message->event) {
+            case 'payment.authorized':
+                $status = 'Verifying Payment';
+                break;
+
+            case 'payment.captured':
+                $status = 'Payment Successfool';
+                break;
+
+            case 'payment.failed':
+                $status = 'Payment Failed';
+                break;
+
+            default:
+                $status = 'Unknown';
+                break;
+        }
+
+        $this->db->set('Status', $status);
+        $this->db->where('razorpay_order_id', $message->payload->payment->entity->order_id);
         $this->db->update('orders');
-    }
-
-    public function handlePaymentIntentSucceeded($paymentIntent){
-        $data=array(
-            'Status' => 'Success'
-        );
-        $this->db->where('intent_id',$paymentIntent->id);
-        $this->db->update('orders', $data);
-        return $this->db->get_where('orders', array('intent_id' => $paymentIntent->id) )->first_row();
-    }
-
-    public function handlePaymentMethodAttached($paymentMethod)
-    {
-
-    }
-
-    public function handlePaymentIntentProcessing($paymentIntent)
-    {
-        $data=array(
-            'Status' => 'Processing'
-        );
-        $this->db->where('intent_id',$paymentIntent->id);
-        $this->db->update('orders',$data);
-    }
-
-    public function handlePaymentIntentFailed($paymentIntent)
-    {
-        $data = array(
-            'Status' => 'Failed'
-        );
-        $this->db->where('intent_id',$paymentIntent->id);
-        $this->db->update('orders',$data);
-        return $this->db->get_where('orders', array('intent_id' => $paymentIntent->id) )->first_row();
-    }
-
-    public function handlePaymentIntentCanceled($paymentIntent)
-    {
-        $data = array(
-            'Status' => 'Canceled'
-        );
-        $this->db->where('intent_id',$paymentIntent->id);
-        $this->db->update('orders',$data);
+        return $this->db->get_where(
+            'orders',
+            array('razorpay_order_id' => $message->payload->payment->entity->order_id)
+        )->first_row();
     }
 }

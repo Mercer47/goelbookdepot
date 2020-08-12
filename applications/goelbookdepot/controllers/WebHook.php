@@ -21,7 +21,45 @@ class WebHook extends CI_Controller
         $secret = $this->config->item('RAZORPAY_WEBHOOK_SECRET');
         $expected_signature = hash_hmac('sha256', $message, $secret);
         if ($expected_signature === $signature) {
-            $this->WebhookModel->updateOrder($message);
+            $order = $this->WebhookModel->updateOrder(json_decode($message));
+            $payload = json_decode($message);
+            switch (json_decode($payload->event)) {
+                case 'payment.captured':
+                    $subject = 'Order Confirmed';
+                    $message = 'Dear '.$order->Name.', <br/> Thanks for buying books from Goel Book Depot.
+                                <br/>You will be notified when your Order will be shipped.
+                                <br/>You can also check your order Status in "My Orders" section after Signing in to Goel Book Depot App
+                                <br/>Have a Nice Day
+                                <br/><br/>With Regards,
+                                <br/>Goel Book Depot';
+                    $mailParams = [
+                        'order' => $order,
+                        'subject' => $subject,
+                        'message' => $message,
+                    ];
+                    $this->sendConfirmationMail($mailParams);
+                    break;
+
+                case 'payment.failed':
+                    $subject = 'Order Failed';
+                    $message = 'Dear '.$order->Name.', <br/> Thank You for placing an order on Goel Book Depot .
+                                <br/>You recently placed an order but the order was failed.
+                                <br/>It may be due to problems in your bank server. Please try to place order again after sometime.
+                                <br/>Have a Nice Day.
+                                <br/><br/>With Regards,
+                                <br/>Goel Book Depot';
+                    $mailParams = [
+                        'order' => $order,
+                        'subject' => $subject,
+                        'message' => $message,
+                    ];
+                    $this->sendConfirmationMail($mailParams);
+                    break;
+
+                default:
+                    $status = 'Unknown';
+                    break;
+            }
         } else {
             http_response_code(400);
         }
