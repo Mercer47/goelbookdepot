@@ -9,6 +9,13 @@ class WebhookModel extends CI_Model
         $this->load->database();
     }
 
+    public function updateOrder($message)
+    {
+        $this->db->set('Status', 'Webhook Tested');
+        $this->db->where('OrderId >', 0);
+        $this->db->update('orders');
+    }
+
     public function handlePaymentIntentSucceeded($paymentIntent){
         $data=array(
             'Status' => 'Success'

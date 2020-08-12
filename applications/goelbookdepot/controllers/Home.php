@@ -1,5 +1,6 @@
 <?php
 
+use Razorpay\Api\Api;
 /**
  * 
  */
@@ -230,19 +231,21 @@ class Home extends CI_Controller
             $this->load->view('placeorder', $data);
         } else {
             $this->config->load('credentials');
-            $amount = $_SESSION['amount']."00";
-            \Stripe\Stripe::setApiKey($this->config->item('STRIPE_DEV_API_KEY'));
-            $intent = \Stripe\PaymentIntent::create([
-                'amount' => intval($amount),
-                'currency' => 'inr',
-                'payment_method_types' => ['card'],
-                'receipt_email' => 'macmershimla@gmail.com',
-            ]);
-            $data['intent'] = $intent;
+            $data['amount'] = $_SESSION['amount']."00";
+
             if (!isset($_SESSION['cart'])) {
                 redirect(site_url('home'));
             }
 
+            $api = new Api($this->config->item('RAZORPAY_API'), $this->config->item('RAZORPAY_SECRET'));            $orderData = [
+                'receipt'         => 3456,
+                'amount'          => intval($data['amount']), // 2000 rupees in paise
+                'currency'        => 'INR',
+                'payment_capture' => 1 // auto capture
+            ];
+
+            $razorpayOrder = $api->order->create($orderData);
+            $data['razorpayOrderId'] = $razorpayOrder['id'];
             $details = array(
                 'user_id' => $_SESSION['user_id'],
                 'Name' => $this->input->post('name'),
@@ -251,13 +254,12 @@ class Home extends CI_Controller
                 'Address' => $this->input->post('address'),
                 'Items' => json_encode($_SESSION['final_cart']),
                 'Total' => $_SESSION['amount'],
-                'intent_id' => $intent->id,
-                'Status' => 'Verifying Payment',
+                'razorpay_order_id' => $razorpayOrder['id'],
+                'Status' => 'Payment Initialized',
                 'shipping_status' => 'Order Received',
                 'Timestamp' => date("Y-m-d H:i:s")
             );
-            $_SESSION['order_id'] = $intent->id;
-            $data['customerName'] = $details['Name'];
+            $data['details'] = $details;
             $this->Store->addOrder($details);
             $this->load->view('checkout',$data);
         }
