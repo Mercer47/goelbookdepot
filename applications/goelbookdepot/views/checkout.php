@@ -23,7 +23,7 @@
         <div class="col-lg-4"></div>
         <div class="col-md-12 col-lg-4 form-container user-box">
             <p class="checkout-heading">Complete Your Payment</p>
-            <button id="rzp-button1" class="btn-sign-in">Proceed to Payment</button>
+            <button id="rzp-button1" class="btn-sign-in">Pay Now</button>
             <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
             <script>
                 var options = {
@@ -31,8 +31,8 @@
                     "amount": <?php echo $amount ?>, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
                     "currency": "INR",
                     "name": "Goel Book Depot",
-                    "description": "Test Transaction",
-                    "image": "https://example.com/your_logo",
+                    "description": "Books Purchase",
+                    "image": "<?php echo base_url('assets/icons/book.png') ?>",
                     "order_id": "<?php echo $razorpayOrderId ?>", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
                     "handler": function (response){
                         $.ajax({
@@ -41,6 +41,13 @@
                             data: { response : response,
                                 orderId : "<?php echo $razorpayOrderId ?>",
                                 '<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>'
+                            },
+                            success: function (res) {
+                                if (res === "200") {
+                                    window.location.href = '<?php echo site_url('order/status/1?message=').urlencode("Payment Successful") ?>'
+                                } else {
+                                    window.location.href = '<?php echo site_url('order/status/0?message=').urlencode("Payment Failed") ?>'
+                                }
                             }
                         })
 
@@ -58,7 +65,10 @@
                     }
                 };
                 var rzp1 = new Razorpay(options);
-                document.getElementById('rzp-button1').onclick = function(e){
+                $(document).ready(function(){
+                    rzp1.open();
+                });
+                document.getElementById('rzp-button1').onclick = function(e) {
                     rzp1.open();
                     e.preventDefault();
                 }
