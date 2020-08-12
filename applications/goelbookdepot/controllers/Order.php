@@ -30,9 +30,9 @@ class Order extends CI_Controller
         $generatedSignature = hash_hmac('sha256', $orderId."|".$response['razorpay_payment_id'], $this->config->item('RAZORPAY_SECRET'));
         if ($generatedSignature === $response['razorpay_signature']) {
             $this->OrderModel->updateOrder($response);
-            echo http_response_code('200');
+            http_response_code('200');
         } else {
-            echo http_response_code('400');
+            http_response_code('400');
         }
     }
 }

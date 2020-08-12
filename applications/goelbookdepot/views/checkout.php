@@ -43,9 +43,7 @@
                                 '<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>'
                             }
                         })
-                        alert(response.razorpay_payment_id);
-                        alert(response.razorpay_order_id);
-                        alert(response.razorpay_signature)
+
                     },
                     "prefill": {
                         "name": "<?php echo $details['Name'] ?>",

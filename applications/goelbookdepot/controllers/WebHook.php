@@ -23,7 +23,7 @@ class WebHook extends CI_Controller
         if ($expected_signature === $signature) {
             $order = $this->WebhookModel->updateOrder(json_decode($message));
             $payload = json_decode($message);
-            switch (json_decode($payload->event)) {
+            switch ($payload->event) {
                 case 'payment.captured':
                     $subject = 'Order Confirmed';
                     $message = 'Dear '.$order->Name.', <br/> Thanks for buying books from Goel Book Depot.
