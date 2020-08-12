@@ -19,10 +19,11 @@
             <p class="account-details-heading hide-lg">Your Orders</p>
         </div>
         <?php foreach ($orders as $order) { ?>
+        <div class="col-xs-12 col-lg-4">
             <?php foreach (json_decode($order->Items) as $id) {
                 $book = $this->db->get_where('books', array('id' => $id))
                     ->first_row(); ?>
-                <div class="col-xs-12 col-lg-2 orders-item cart-item">
+                <div class="col-xs-12 col-lg-9 orders-item cart-item">
                     <a href="<?php echo site_url('home/showbook/').$book->id ?>">
                         <div class="col-xs-4 col-lg-12">
                             <?php if ($book->image) { ?>
@@ -48,6 +49,7 @@
                     </div>
                 </div>
             <?php } ?>
+        </div>
         <?php } ?>
     <?php } else { ?>
         <div class="col-xs-12 empty">
