@@ -26,6 +26,11 @@ class ComposerStaticInit087d29de4979b6df679dcfb87de5644c
             'Symfony\\Component\\Yaml\\' => 23,
             'Stripe\\' => 7,
         ),
+        'R' => 
+        array (
+            'Razorpay\\Tests\\' => 15,
+            'Razorpay\\Api\\' => 13,
+        ),
         'P' => 
         array (
             'Prophecy\\' => 9,
@@ -61,6 +66,14 @@ class ComposerStaticInit087d29de4979b6df679dcfb87de5644c
         array (
             0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
         ),
+        'Razorpay\\Tests\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/razorpay/razorpay/tests',
+        ),
+        'Razorpay\\Api\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/razorpay/razorpay/src',
+        ),
         'Prophecy\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy',
@@ -85,6 +98,13 @@ class ComposerStaticInit087d29de4979b6df679dcfb87de5644c
             'org\\bovigo\\vfs' => 
             array (
                 0 => __DIR__ . '/..' . '/mikey179/vfsstream/src/main/php',
+            ),
+        ),
+        'R' => 
+        array (
+            'Requests' => 
+            array (
+                0 => __DIR__ . '/..' . '/rmccue/requests/library',
             ),
         ),
     );

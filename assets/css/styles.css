@@ -438,6 +438,12 @@ ul#nav li{
 	font-size: 20px;
 }
 
+.checkout-heading
+{
+	font-family: Questrial-regular, serif;
+	font-size: 40px;
+}
+
 /* What to display when screen is large */
 @media screen and (min-width: 700px) {
 	.site-heading{

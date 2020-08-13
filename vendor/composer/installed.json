@@ -852,6 +852,116 @@
         "abandoned": true
     },
     {
+        "name": "razorpay/razorpay",
+        "version": "2.5.0",
+        "version_normalized": "2.5.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/razorpay/razorpay-php.git",
+            "reference": "96c0167176cf53e3da15640622e9b993a3450ec7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/razorpay/razorpay-php/zipball/96c0167176cf53e3da15640622e9b993a3450ec7",
+            "reference": "96c0167176cf53e3da15640622e9b993a3450ec7",
+            "shasum": ""
+        },
+        "require": {
+            "ext-json": "*",
+            "php": ">=5.3.0",
+            "rmccue/requests": "v1.7.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.8|~5.0",
+            "raveren/kint": "1.*"
+        },
+        "time": "2019-05-20T13:15:50+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Razorpay\\Api\\": "src/",
+                "Razorpay\\Tests\\": "tests/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Abhay Rana",
+                "email": "nemo@razorpay.com",
+                "homepage": "https://captnemo.in",
+                "role": "Developer"
+            },
+            {
+                "name": "Shashank Kumar",
+                "email": "shashank@razorpay.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "Razorpay PHP Client Library",
+        "homepage": "https://docs.razorpay.com",
+        "keywords": [
+            "api",
+            "client",
+            "php",
+            "razorpay"
+        ]
+    },
+    {
+        "name": "rmccue/requests",
+        "version": "v1.7.0",
+        "version_normalized": "1.7.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/rmccue/Requests.git",
+            "reference": "87932f52ffad70504d93f04f15690cf16a089546"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/rmccue/Requests/zipball/87932f52ffad70504d93f04f15690cf16a089546",
+            "reference": "87932f52ffad70504d93f04f15690cf16a089546",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2"
+        },
+        "require-dev": {
+            "requests/test-server": "dev-master"
+        },
+        "time": "2016-10-13T00:11:37+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Requests": "library/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "ISC"
+        ],
+        "authors": [
+            {
+                "name": "Ryan McCue",
+                "homepage": "http://ryanmccue.info"
+            }
+        ],
+        "description": "A HTTP library written in PHP, for human beings.",
+        "homepage": "http://github.com/rmccue/Requests",
+        "keywords": [
+            "curl",
+            "fsockopen",
+            "http",
+            "idna",
+            "ipv6",
+            "iri",
+            "sockets"
+        ]
+    },
+    {
         "name": "sebastian/code-unit-reverse-lookup",
         "version": "1.0.1",
         "version_normalized": "1.0.1.0",
@@ -1386,17 +1496,17 @@
     },
     {
         "name": "stripe/stripe-php",
-        "version": "v7.45.0",
-        "version_normalized": "7.45.0.0",
+        "version": "v7.46.1",
+        "version_normalized": "7.46.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/stripe/stripe-php.git",
-            "reference": "21e5001f5e0d787e4755c8bfc00e578dce9ae058"
+            "reference": "fd57205d3e3a1dccab80538654128d5c46a1f5ac"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/stripe/stripe-php/zipball/21e5001f5e0d787e4755c8bfc00e578dce9ae058",
-            "reference": "21e5001f5e0d787e4755c8bfc00e578dce9ae058",
+            "url": "https://api.github.com/repos/stripe/stripe-php/zipball/fd57205d3e3a1dccab80538654128d5c46a1f5ac",
+            "reference": "fd57205d3e3a1dccab80538654128d5c46a1f5ac",
             "shasum": ""
         },
         "require": {
@@ -1412,7 +1522,7 @@
             "squizlabs/php_codesniffer": "^3.3",
             "symfony/process": "~3.4"
         },
-        "time": "2020-07-29T04:29:52+00:00",
+        "time": "2020-08-07T22:11:58+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1445,8 +1555,8 @@
     },
     {
         "name": "symfony/polyfill-ctype",
-        "version": "v1.18.0",
-        "version_normalized": "1.18.0.0",
+        "version": "v1.18.1",
+        "version_normalized": "1.18.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/polyfill-ctype.git",

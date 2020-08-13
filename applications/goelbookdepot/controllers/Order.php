@@ -3,6 +3,14 @@
 
 class Order extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('OrderModel');
+        $this->config->load('credentials');
+    }
+
+
     public function status($status)
     {
         if (!is_null($status) && isset($_GET['message'])) {
@@ -13,5 +21,18 @@ class Order extends CI_Controller
             redirect(site_url('home'));
         }
 
+    }
+
+    public function verify()
+    {
+        $response = $this->input->post('response');
+        $orderId = $this->input->post('orderId');
+        $generatedSignature = hash_hmac('sha256', $orderId."|".$response['razorpay_payment_id'], $this->config->item('RAZORPAY_SECRET'));
+        if ($generatedSignature === $response['razorpay_signature']) {
+            $this->OrderModel->updateOrder($response);
+            print_r(json_encode(http_response_code(200)));
+        } else {
+            print_r(json_encode(http_response_code(400)));
+        }
     }
 }
