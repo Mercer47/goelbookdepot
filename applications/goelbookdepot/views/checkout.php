@@ -16,8 +16,6 @@
             src: url(<?php echo base_url('assets/fonts/Questrial-regular.ttf'); ?>);
         }
     </style>
-    <?php $this->view('loader/style') ?>
-
 </head>
 <body style="background: #f2f2f2">
         <div class="col-lg-4"></div>
@@ -74,8 +72,13 @@
                 }
             </script>
         </div>
-    <div id="loader">
-
-    </div>
+        <div class="loader-wrapper">
+            <span class="loader"><span class="loader-inner"></span></span>
+        </div>
+        <script>
+            $(window).on("load",function(){
+                $(".loader-wrapper").fadeOut("slow");
+            });
+        </script>
 </body>
 </html>
