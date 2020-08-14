@@ -1,5 +1,7 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 /**
  *
  */
@@ -469,8 +471,13 @@ class Home extends CI_Controller
     {
         $status = $this->input->post('shipping_status');
         $orderId = $this->input->post('order_id');
-        $this->Store->changeShippingStatus($status, $orderId);
-        redirect(site_url('home/orders'));
+        $order = $this->Store->changeShippingStatus($status, $orderId);
+        if ($order) {
+            $this->sendShippingStatusMail($status, $order);
+            redirect(site_url('home/orders'));
+        } else {
+            redirect(site_url('home/orders'));
+        }
     }
 
     public function bundles()
@@ -552,6 +559,73 @@ class Home extends CI_Controller
         unset($_SESSION);
         session_destroy();
         redirect(site_url('login'));
+    }
+
+    public function sendShippingStatusMail($status, $order)
+    {
+        switch ($status) {
+            case 'Shipped':
+                $subject = 'Order Shipped';
+                $message = 'We are pleased to inform you that your order has been Shipped on'.$order->updated_at;
+                break;
+            case 'Delivered':
+                $subject = 'Order Delivered';
+                $message = 'Your order has been Delivered on '. $order->updated_at;
+                break;
+            case 'Canceled':
+                $subject = 'Order Canceled';
+                $message = 'We are sorry to inform you that your order has been Cancelled due to non-payment.';
+                break;
+            default:
+                $subject = '';
+        }
+
+        if ($subject) {
+            // Instantiation and passing `true` enables exceptions
+            $mail = new PHPMailer(true);
+            try {
+                $this->config->load('credentials');
+                //Server settings
+
+                //Live server settings
+                $mail->isSMTP();
+                $mail->Host = 'localhost';
+                $mail->SMTPAuth = false;
+                $mail->SMTPAutoTLS = false;
+                $mail->Port = 25;
+
+                //local server settings
+//                $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+//                $mail->isSMTP();                                            // Send using SMTP
+//                $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+//                $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+//                $mail->Username   = 'raghavkumakshay@gmail.com';                     // SMTP username
+//                $mail->Password   = $this->config->item('GMAIL_SECRET');                               // SMTP password
+//                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+//                $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+
+                //Recipients
+                //local server setFrom
+//            $mail->setFrom('raghavkumakshay@gmail.com', 'GBD');
+                //live server setFrom
+                $mail->setFrom('service@goelbookdepot.macmer.in', 'Goel Book Depot Shimla');
+                $mail->addAddress($order->Email, 'Dear Customer');     // Add a recipient
+//            $mail->addAddress('ellen@example.com');               // Name is optional
+//            $mail->addReplyTo('info@example.com', 'Information');
+//            $mail->addCC('cc@example.com');
+//            $mail->addBCC('bcc@example.com');
+
+                // Content
+                $mail->isHTML(true);                                  // Set email format to HTML
+                $mail->Subject = $subject;
+                $mail->Body    = "Dear ".$order->Name."<br/><br/>".
+                                 $message."<br/><br/>"."With Regards<br/>Goel Book Depot Shimla";
+
+                $mail->send();
+            } catch (Exception $e) {
+                //
+            }
+        }
     }
 }
 

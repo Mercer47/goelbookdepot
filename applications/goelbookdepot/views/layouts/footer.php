@@ -2,6 +2,53 @@
     <span class="loader"><span class="loader-inner"></span></span>
 </div>
 </div>
+<div class="col-lg-12 hide-sm bottom-bar">
+    <div class="col-lg-12 bottom-bar-heading">
+        <p>Quick Links</p>
+    </div>
+    <div class="col-lg-4">
+        <a href="<?php echo site_url('home/terms') ?>">
+            <i class="las la-list-alt"></i>
+            Terms & Conditions
+        </a>
+        <a href="<?php echo site_url('home/privacy') ?>">
+            <i class="las la-user-secret"></i>
+            Privacy Policy
+        </a>
+        <a href="<?php echo site_url('home/contact') ?>">
+            <i class="las la-tty"></i>
+            Contact Us
+        </a>
+    </div>
+    <div class="col-lg-4">
+        <a href="<?php echo site_url('home/upcoming') ?>">
+            <i class="las la-retweet"></i>
+            Old editions at 50%
+        </a>
+        <a href="<?php echo site_url('home/upcoming') ?>">
+            <i class="las la-crosshairs"></i>
+            Exam Central
+        </a>
+        <a href="<?php echo site_url('home/contact') ?>">
+            <i class="las la-tty"></i>
+            Contact Us
+        </a>
+    </div>
+    <div class="col-lg-4">
+        <a href="<?php echo site_url('home/signin') ?>">
+            <i class="las la-sign-in-alt"></i>
+            Sign In
+        </a>
+        <a href="<?php echo site_url('bundle') ?>">
+            <i class="las la-book"></i>
+            Bundle <Store></Store>
+        </a>
+        <a href="<?php echo site_url('home/listcategories') ?>">
+            <i class="las la-tags"></i>
+            Shop By Category
+        </a>
+    </div>
+</div>
 <script type="text/javascript">
     var slideIndex = 0;
     showSlides();

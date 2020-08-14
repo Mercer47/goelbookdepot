@@ -57,8 +57,8 @@ foreach($data as $row)
         ?>
         <tr>
             <td><?php echo $count; ?></td>
-           <td><?php echo $row->title; ?></td>
-           <td><?php echo $row->MRP; ?></td>
+            <td><?php echo $row->title; ?></td>
+            <td><?php echo $row->MRP; ?></td>
             <td><?php echo $row->Discount."%"; ?></td>
             <td><?php echo $row->charges; ?></td>
             <td><?php echo $row->MRP-floor(($row->Discount/100)*$row->MRP)+($row->charges); ?></td>
