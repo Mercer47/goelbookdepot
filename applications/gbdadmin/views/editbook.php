@@ -33,11 +33,9 @@
             </div>
             <div class="col-md-4" align="left">
                 <p class="book-form-heading">Cover Image</p>
-                <label for="cover" class="custom-file-upload"></label>
-                <input type="file" class="book-form-input" name="cover" >
+                <input type="file" class="custom-file-upload" name="cover" >
                 <p class="book-form-heading">Backcover Image</p>
-                <label for="backcover" class="custom-file-upload"></label>
-                <input type="file" class="book-form-input" name="backcover" >
+                <input type="file" class="custom-file-upload" name="backcover" >
                 <p class="book-form-heading">ISBN</p>
                 <input type="number" class="book-form-input" name="isbn" value="<?php echo $info->ISBN; ?>">
                 <p class="book-form-heading">Edition</p>
