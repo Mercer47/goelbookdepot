@@ -7,6 +7,5 @@ deployment:
     - /bin/cp -R applications/goelbookdepot/views $DEPLOYPATH
     - export DEPLOYPATH=/home/x447x173y962/public_html/
     - /bin/cp -R assets $DEPLOYPATH
-    - /bin/cp -R vendor $DEPLOYPATH
 
 
