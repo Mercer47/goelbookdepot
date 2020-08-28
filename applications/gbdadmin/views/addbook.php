@@ -38,11 +38,9 @@
                     <option>Select a Category first</option>
                 </select>
                 <p class="book-form-heading">Cover Image</p>
-                <label for="cover" class="custom-file-upload"></label>
-                <input type="file" id="cover" name="cover" class="book-form-input" required>
+                <input type="file" id="cover" name="cover" class="custom-file-upload">
                 <p class="book-form-heading">Backcover Image</p>
-                <label for="backcover" class="custom-file-upload"></label>
-                <input type="file" id="backcover" name="backcover" class="book-form-input" required>
+                <input type="file" id="backcover" name="backcover" class="custom-file-upload">
                 <p class="book-form-heading">ISBN</p>
                 <input type="number" name="isbn" class="book-form-input">
                 <p class="book-form-heading">Edition</p>
