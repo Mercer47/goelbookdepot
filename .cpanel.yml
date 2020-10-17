@@ -5,7 +5,7 @@ deployment:
     - /bin/cp -R applications/gbdadmin/controllers $DEPLOYPATH
     - /bin/cp -R applications/gbdadmin/models $DEPLOYPATH
     - /bin/cp -R applications/gbdadmin/views $DEPLOYPATH
-    - export DEPLOYPATH=/home/x447x173y962/public_html/
-    - /bin/cp -R assets $DEPLOYPATH
+#    - export DEPLOYPATH=/home/x447x173y962/public_html/
+#    - /bin/cp -R assets $DEPLOYPATH
 
 
