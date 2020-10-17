@@ -80,7 +80,10 @@
                     $.ajax({
                         url: "<?php echo site_url('home/selection') ?>",
                         type: "POST",
-                        data: "id=" + id,
+                        data: {
+                            id : id,
+                            '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
+                        },
                         success: function (html) {
                             $("#subcat").html(html);
                             $("#lastcat").html("<option>Select sub category first</option>");
@@ -98,7 +101,10 @@
                     $.ajax({
                         url: "<?php echo site_url('home/selection') ?>",
                         method: "POST",
-                        data: "subid=" + subID,
+                        data: {
+                            subid : subID,
+                            '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
+                        },
                         success: function (html) {
                             $("#lastcat").html(html);
                         }
