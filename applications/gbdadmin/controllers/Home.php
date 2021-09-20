@@ -608,7 +608,7 @@ class Home extends CI_Controller
                 //local server setFrom
 //            $mail->setFrom('raghavkumakshay@gmail.com', 'GBD');
                 //live server setFrom
-                $mail->setFrom('service@goelbookdepot.macmer.in', 'Goel Book Depot Shimla');
+                $mail->setFrom('service@goelbookdepot.co.in', 'Goel Book Depot Shimla');
                 $mail->addAddress($order->Email, 'Dear Customer');     // Add a recipient
 //            $mail->addAddress('ellen@example.com');               // Name is optional
 //            $mail->addReplyTo('info@example.com', 'Information');
