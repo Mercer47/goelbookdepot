@@ -1,11 +1,11 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/z834o9vwc54a/public_html/
-    - /bin/cp -R applications $DEPLOYPATH
-    - /bin/cp -R system $DEPLOYPATH
-    - /bin/cp -R tests $DEPLOYPATH
-    - /bin/cp -R user_guide $DEPLOYPATH
-    - /bin/cp -R vendor $DEPLOYPATH
-    - /bin/cp -R admin.php $DEPLOYPATH
-    - /bin/cp -R index.php $DEPLOYPATH
+    - export DEPLOYPATH=/home/z834o9vwc54a/public_html/applications/gbdadmin/config/production/
+    - /bin/cp -R config.php $DEPLOYPATH
+#    - /bin/cp -R system $DEPLOYPATH
+#    - /bin/cp -R tests $DEPLOYPATH
+#    - /bin/cp -R user_guide $DEPLOYPATH
+#    - /bin/cp -R vendor $DEPLOYPATH
+#    - /bin/cp -R admin.php $DEPLOYPATH
+#    - /bin/cp -R index.php $DEPLOYPATH
