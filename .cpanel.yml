@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/z834o9vwc54a/public_html/applications/gbdadmin/config/production/
+    - export DEPLOYPATH=/home/z834o9vwc54a/public_html/applications/gbdadmin/config/production
     - /bin/cp -R config.php $DEPLOYPATH
