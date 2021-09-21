@@ -223,7 +223,7 @@ class Auth extends CI_Controller
             //local server setFrom
 //            $mail->setFrom('raghavkumakshay@gmail.com', 'GBD');
             //live server setFrom
-            $mail->setFrom('customerservice@goelbookdepot.in', 'Goel Book Depot Shimla');
+            $mail->setFrom('service@goelbookdepot.co.in', 'Goel Book Depot Shimla');
             $mail->addAddress($emailId, 'Dear Customer');     // Add a recipient
 //            $mail->addAddress('ellen@example.com');               // Name is optional
 //            $mail->addReplyTo('info@example.com', 'Information');
@@ -260,7 +260,7 @@ class Auth extends CI_Controller
             $mail->SMTPAutoTLS = false;
             $mail->Port = 25;
 
-            $mail->setFrom('customerservice@goelbookdepot.in', 'Goel Book Depot Shimla');
+            $mail->setFrom('service@goelbookdepot.co.in', 'Goel Book Depot Shimla');
             $mail->addAddress($user->email, $user->name);     // Add a recipient
 
             // Content

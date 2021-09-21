@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://gbd.local';
-
+//$config['base_url'] = 'https://goelbookdepot.co.in';
 /*
 |--------------------------------------------------------------------------
 | Index File
